@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//Users/baraniraja/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/26304291-d360-466c-86c1-098186e9f70b/bfa7dc08-d0ca-4fda-8b91-8f57a353c27d/skills/design-inspiration/references/**)",
+      "mcp__Claude_Preview__preview_start",
+      "Bash(curl -s https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill)",
+      "Bash(curl -s https://api.github.com/repos/nextlevelbuilder/ui-ux-pro-max-skill/contents/)",
+      "Bash(curl -s https://raw.githubusercontent.com/nextlevelbuilder/ui-ux-pro-max-skill/main/README.md)",
+      "Bash(npx uipro-cli *)",
+      "Bash(ls -la ~/.claude/skills/ui-ux-pro-max/ 2>/dev/null | head -10 || echo \"Checking current project .claude directory...\" && ls -la ./.claude/skills/ui-ux-pro-max/ 2>/dev/null | head -10)",
+      "Bash(ls -la ~/.claude/ 2>/dev/null || echo \"No ~/.claude directory\")",
+      "Bash(mkdir -p ~/.claude/skills)",
+      "Bash(cp -r ./.claude/skills/ui-ux-pro-max ~/.claude/skills/)",
+      "Bash(cd \"/Users/baraniraja/.claude/skills/ui-ux-pro-max\")",
+      "Bash(python3 scripts/search.py \"premium marine technology platform connected vessel intelligence landing page elegant\" --design-system -p \"VectorMarine\")",
+      "Bash(grep -n \"display:block\\\\|display: block\\\\|^a{\\\\|^a,\\\\| a{display\" assets/css/styles.css)",
+      "WebFetch(domain:hubtown.co.in)",
+      "Bash(python3 .claude/skills/ui-ux-pro-max/scripts/search.py \"premium dark maritime fleet command center control room navy black glowing blue\" --design-system -p \"VectorMarine Dark\")"
+    ]
+  }
+}
