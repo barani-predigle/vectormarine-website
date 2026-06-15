@@ -41,6 +41,8 @@
     <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
     <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7"/></symbol>
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v6M12 15v6M3 12h6M15 12h6" /><circle cx="12" cy="12" r="2.4"/></symbol>
+    <symbol id="i-cross" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+    <symbol id="i-dash" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
         <symbol id="vessel-detailed" viewBox="0 0 44 98">
       <g clip-path="url(#clip0_vessel_detailed)">
 <path d="M1.883e-06 43.0396L1.64212e-06 37.529C0.100732 37.184 0.121793 36.5882 0.152067 36.2212C0.209571 35.4144 0.284232 34.6086 0.376027 33.8038C0.679325 31.6729 1.10406 29.5517 1.64924 27.4438C3.8206 18.6966 9.20155 9.61527 17.5761 2.83231C18.5307 2.05903 20.3336 0.59382 21.4161 -1.42716e-05L21.5591 -1.42779e-05C31.91 4.45544 37.8525 15.3498 40.4889 23.1912C40.9289 24.5598 41.325 25.9351 41.6771 27.3156C41.8528 27.9673 42.0706 28.5765 42.2188 29.2358C42.7355 31.5351 43.0512 33.8435 43.484 36.1494C43.6489 37.028 43.6919 37.9262 43.7916 38.8066C43.8266 39.1162 43.8801 40.0541 44 40.3135L44 44.7211C43.9104 44.9953 43.9057 45.7528 43.8976 46.0562L43.843 48.3468L43.554 55.8871C43.148 64.5905 42.5339 73.2887 41.712 81.9781C41.4755 84.8894 41.2034 87.7992 40.8956 90.7073C40.8073 91.5443 40.9258 92.4747 40.7274 93.2874C40.6087 93.7734 40.1864 94.3223 39.7073 94.6847C38.0312 95.9523 30.4436 97.3176 27.9415 97.6356C26.5865 97.8047 25.2156 97.9066 23.8395 97.9406C20.1399 98.0508 16.3167 97.7162 12.6972 97.2179C10.1121 96.862 8.08469 96.499 5.7789 95.5599C4.20445 94.9186 3.50256 94.7477 3.19352 93.4091C2.7383 91.4372 2.75391 89.465 2.58689 87.482C2.19142 82.8918 1.87762 78.2984 1.64557 73.7029C1.62948 73.514 1.60053 73.3018 1.62689 73.1152C1.22289 68.9842 1.24285 64.5804 1.04169 60.434C0.883743 57.1786 0.603762 53.923 0.424048 50.6617L0.177856 45.7982C0.154204 45.203 0.153856 43.5693 1.883e-06 43.0396Z" fill="white"/>
@@ -518,50 +520,138 @@
 <section class="section pricing" id="pricing">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Pricing</span>
-      <h2 class="reveal">Simple plans for every vessel.</h2>
+      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Membership Plans</span>
+      <h2 class="reveal">Find the Right Membership for Your Adventures</h2>
+      <p class="muted reveal" style="max-width: 600px; margin: 16px auto 0;">Whether you're just getting started, managing your own vessel, or looking for fully automated tracking and vessel integration, choose the plan that fits your boating lifestyle.</p>
     </div>
     <div class="price-grid">
+      <!-- Card 1 -->
       <article class="price-card reveal">
-        <h3 class="price-name">Starter</h3>
-        <div class="price-amt">Free</div>
-        <p class="price-for">For occasional boaters.</p>
+        <h3 class="price-name">Free Explorer</h3>
+        <div class="price-amt">$0<span class="price-cycle">Forever</span></div>
+        <p class="price-for">Perfect for discovering the platform and connecting with the community.</p>
+        
+        <div class="price-section-title">What's Included</div>
         <ul class="price-feats">
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Vessel Profile</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Basic Tracking</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Limited Waypoints</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Trip History</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Access to the community network</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>View public vessel activity</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Create and save waypoints</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Basic trip tracking</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Explore maps and fishing intel</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Join discussions and groups</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Receive platform updates</li>
         </ul>
-        <a class="btn btn-soft full" href="#contact">Get Started</a>
+        
+        <div class="price-section-title">Not Included</div>
+        <ul class="price-feats">
+          <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Add your own vessel</li>
+          <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Personal vessel data storage</li>
+          <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Advanced vessel management</li>
+          <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Automatic trip logging</li>
+          <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Offline capability</li>
+        </ul>
+        
+        <div style="margin-top:auto">
+          <a class="btn btn-soft full" href="#contact">Start Free</a>
+          <span class="price-note">No credit card required.</span>
+        </div>
       </article>
 
-      <article class="price-card featured reveal">
+      <!-- Card 2 -->
+      <article class="price-card featured reveal" style="transform:translateY(0)">
         <span class="price-badge">Most Popular</span>
-        <h3 class="price-name">Captain</h3>
-        <div class="price-amt">Monthly<span class="price-cycle">Subscription</span></div>
-        <p class="price-for">For active boaters.</p>
+        <h3 class="price-name">Premium Membership</h3>
+        <div class="price-amt">$9.99<span class="price-cycle">Month</span></div>
+        <p class="price-for">Designed for boat owners who want to manage their vessel, build their own history, and unlock the full member experience.</p>
+        
+        <div class="price-section-title">Everything in Free, Plus</div>
         <ul class="price-feats">
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Unlimited Trips</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Unlimited Waypoints</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Borrow Vessels</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Ride Along</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Advanced Insights</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Add and manage your vessel</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Create a personalized vessel profile</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Store and organize vessel data</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Build your own trip history</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Advanced member tools</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Enhanced vessel management</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Access future premium member features</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Increased visibility within the community</li>
         </ul>
-        <a class="btn btn-primary full" href="#contact">Upgrade</a>
+        
+        <div class="price-section-title">Ideal For</div>
+        <p class="price-for" style="margin-top:0">Boat owners who want to track, manage, and grow their personal boating data.</p>
+        
+        <div style="margin-top:auto">
+          <a class="btn btn-primary full" href="#contact">Upgrade to Premium</a>
+          <span class="price-note" style="color:var(--accent-400)">Most Popular</span>
+        </div>
       </article>
 
+      <!-- Card 3 -->
       <article class="price-card reveal">
-        <h3 class="price-name">Fleet</h3>
-        <div class="price-amt">Custom<span class="price-cycle">Pricing</span></div>
-        <p class="price-for">For teams and organizations.</p>
+        <h3 class="price-name">Premium + Data Bridge</h3>
+        <div class="price-amt" style="font-size:1.8rem">Data Bridge<span class="price-cycle">Hardware Integration</span></div>
+        <p class="price-for">Transform your vessel into a fully connected experience.</p>
+        
+        <div class="price-section-title">Everything in Premium, Plus</div>
         <ul class="price-feats">
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Multi-Vessel Management</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Fleet Analytics</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Team Permissions</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Priority Support</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Automatic Trip Logging (Auto Start)</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Offline Capability</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Full Vessel Integration</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Seamless trip recording</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Automatic vessel activity capture</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Connected boating experience</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Reduced manual trip management</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Access to future Data Bridge features</li>
         </ul>
-        <a class="btn btn-soft full" href="#contact">Contact Sales</a>
+        
+        <div class="price-section-title">Why Data Bridge?</div>
+        <p class="price-for" style="margin-top:0; font-size:.85rem; line-height:1.4">Your trips are automatically captured without needing to manually start and stop recordings. Stay connected even when you're off-grid and unlock the most advanced vessel experience available.</p>
+        
+        <div style="margin-top:auto">
+          <a class="btn btn-soft full" href="#contact">Buy DataBridge</a>
+          <span class="price-note">Best Experience Available</span>
+        </div>
       </article>
+    </div>
+
+    <!-- Table -->
+    <div class="table-wrap reveal">
+      <table class="feat-table">
+        <thead>
+          <tr>
+            <th>Features</th>
+            <th>Free Explorer</th>
+            <th>Premium</th>
+            <th>Premium + Data Bridge</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Community Access</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Public Vessel Viewing</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Waypoints</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Basic Trip Tracking</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Maps & Intel Access</td><td><span class="check">✓</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Add Your Own Vessel</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Personal Vessel Profile</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Vessel Data Storage</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Advanced Vessel Management</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Personal Trip History</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Automatic Trip Logging</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Offline Capability</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Full Vessel Integration</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+          <tr><td>Connected Vessel Experience</td><td><span class="dash">—</span></td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Bottom CTA -->
+    <div class="pricing-cta-bottom reveal">
+      <h2>Ready to Upgrade Your Experience?</h2>
+      <p>Start free and explore the community, unlock vessel ownership with Premium, or experience fully connected boating with Data Bridge.</p>
+      <div class="btn-group">
+        <a href="#contact" class="btn btn-soft">Start Free</a>
+        <a href="#contact" class="btn btn-primary">Upgrade to Premium</a>
+        <a href="#contact" class="btn btn-soft">Buy DataBridge</a>
+      </div>
     </div>
   </div>
 </section>
