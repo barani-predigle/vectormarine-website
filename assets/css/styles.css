@@ -56,7 +56,7 @@
 }
 
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{
   font-family:var(--body-font);
   color:var(--body);
@@ -514,8 +514,8 @@ a.contact-row:hover{background:rgba(255,255,255,.13);border-color:rgba(127,176,2
 @media (max-width:980px){
   .nav-links{position:fixed;top:0;right:0;height:100dvh;width:min(330px,84vw);flex-direction:column;align-items:flex-start;
     justify-content:center;gap:26px;padding:48px 40px;background:rgba(6,10,20,.97);backdrop-filter:blur(20px);
-    transform:translateX(100%);transition:transform .42s var(--ease);box-shadow:var(--shadow-lg);border-left:1px solid var(--line)}
-  .nav-links.open{transform:none}
+    transform:translateX(110%);transition:transform .42s var(--ease);box-shadow:var(--shadow-lg);border-left:1px solid var(--line)}
+  .nav-links.open{transform:translateX(0)}
   .nav-links a{font-size:1.12rem}
   .nav-toggle{display:flex;z-index:60}
   .brand-by{display:none}
@@ -525,7 +525,7 @@ a.contact-row:hover{background:rgba(255,255,255,.13);border-color:rgba(127,176,2
   .sea-scrim{background:linear-gradient(180deg,rgba(5,7,14,.78) 0%,rgba(5,7,14,.5) 30%,rgba(5,7,14,.55) 64%,rgba(5,7,14,.92) 100%)}
   /* card drops into normal flow under the copy so it never covers the CTAs */
   .fleet-card{position:static;left:auto;right:auto;bottom:auto;transform:translateY(14px);
-    width:min(360px,100%);margin:32px 0 0}
+    width:min(360px,100%);margin:200px auto 0}
   .fleet-card.show{transform:none}
   .hero-hint,.hero-scroll{display:none}
   .feature-grid{grid-template-columns:repeat(2,1fr)}
@@ -537,6 +537,7 @@ a.contact-row:hover{background:rgba(255,255,255,.13);border-color:rgba(127,176,2
 }
 @media (max-width:620px){
   body{font-size:16px}
+  .container { padding: 0 16px; }
   .grid-2{grid-template-columns:1fr}
   .grid-2.flip{direction:ltr}
   .feature-grid{grid-template-columns:1fr}

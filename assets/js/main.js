@@ -10,7 +10,6 @@
   // Gate heavy canvas/rAF work on capable, non-touch devices only.
   const allowHeavy =
     !reduce &&
-    window.innerWidth > 880 &&
     (navigator.hardwareConcurrency || 4) >= 4;
 
   /* -------------------------------------------------
