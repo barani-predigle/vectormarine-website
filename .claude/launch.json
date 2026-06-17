@@ -5,7 +5,8 @@
       "name": "vectormarine",
       "runtimeExecutable": "node",
       "runtimeArgs": ["server.js"],
-      "port": 4137
+      "port": 4137,
+      "autoPort": true
     }
   ]
 }
