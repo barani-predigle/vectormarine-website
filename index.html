@@ -5,8 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>VectorMarine — The Connected Operating System For Modern Boating</title>
 <meta name="description" content="VectorMarine turns any vessel into a connected marine intelligence platform — live telemetry, automatic trip logging, smart waypoints, fleet collaboration, and real-time insights. Powered by EsperWave." />
-<meta name="theme-color" content="#05070E" />
-<script>document.documentElement.classList.add('js');</script>
+<meta name="theme-color" content="#F8FAFC" media="(prefers-color-scheme: light)" />
+<meta name="theme-color" content="#05070E" media="(prefers-color-scheme: dark)" />
+<script>
+  document.documentElement.classList.add('js');
+  const theme = localStorage.getItem("theme");
+  if (theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+  }
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link rel="preconnect" href="https://api.fontshare.com" crossorigin />
@@ -43,6 +50,11 @@
     <symbol id="i-spark" viewBox="0 0 24 24"><path d="M12 3v6M12 15v6M3 12h6M15 12h6" /><circle cx="12" cy="12" r="2.4"/></symbol>
     <symbol id="i-cross" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
     <symbol id="i-dash" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 4L3 11l6.5 2.5L12 20l3-7 6-9Z"/><path d="M9.5 13.5L21 4"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H10l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></symbol>
         <symbol id="vessel-detailed" viewBox="0 0 44 98">
       <g clip-path="url(#clip0_vessel_detailed)">
 <path d="M1.883e-06 43.0396L1.64212e-06 37.529C0.100732 37.184 0.121793 36.5882 0.152067 36.2212C0.209571 35.4144 0.284232 34.6086 0.376027 33.8038C0.679325 31.6729 1.10406 29.5517 1.64924 27.4438C3.8206 18.6966 9.20155 9.61527 17.5761 2.83231C18.5307 2.05903 20.3336 0.59382 21.4161 -1.42716e-05L21.5591 -1.42779e-05C31.91 4.45544 37.8525 15.3498 40.4889 23.1912C40.9289 24.5598 41.325 25.9351 41.6771 27.3156C41.8528 27.9673 42.0706 28.5765 42.2188 29.2358C42.7355 31.5351 43.0512 33.8435 43.484 36.1494C43.6489 37.028 43.6919 37.9262 43.7916 38.8066C43.8266 39.1162 43.8801 40.0541 44 40.3135L44 44.7211C43.9104 44.9953 43.9057 45.7528 43.8976 46.0562L43.843 48.3468L43.554 55.8871C43.148 64.5905 42.5339 73.2887 41.712 81.9781C41.4755 84.8894 41.2034 87.7992 40.8956 90.7073C40.8073 91.5443 40.9258 92.4747 40.7274 93.2874C40.6087 93.7734 40.1864 94.3223 39.7073 94.6847C38.0312 95.9523 30.4436 97.3176 27.9415 97.6356C26.5865 97.8047 25.2156 97.9066 23.8395 97.9406C20.1399 98.0508 16.3167 97.7162 12.6972 97.2179C10.1121 96.862 8.08469 96.499 5.7789 95.5599C4.20445 94.9186 3.50256 94.7477 3.19352 93.4091C2.7383 91.4372 2.75391 89.465 2.58689 87.482C2.19142 82.8918 1.87762 78.2984 1.64557 73.7029C1.62948 73.514 1.60053 73.3018 1.62689 73.1152C1.22289 68.9842 1.24285 64.5804 1.04169 60.434C0.883743 57.1786 0.603762 53.923 0.424048 50.6617L0.177856 45.7982C0.154204 45.203 0.153856 43.5693 1.883e-06 43.0396Z" fill="white"/>
@@ -172,7 +184,7 @@
         <svg width="28" height="28" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg"><g clip-path="url(#clip0_hdr)"><rect width="512" height="512" rx="100" fill="white"/><g clip-path="url(#clip1_hdr)"><path d="M519.875 -13.5H-7.5V525.27H519.875V-13.5Z" fill="url(#paint0_linear_hdr)"/></g><path d="M257.585 45.4502C288.893 45.6485 318.618 52.5177 345.411 64.707L289.901 98.8779C279.017 96.6281 267.742 95.4453 256.19 95.4453C164.682 95.4453 90.5 169.628 90.5 261.136C90.5001 296.679 101.694 329.607 120.746 356.591C96.2377 355.329 76.0302 352.156 63.1504 347.425L57.5713 345.375C46.752 319.897 40.691 291.911 40.5049 262.53L40.5 261.136C40.5 142.013 137.068 45.4453 256.19 45.4453L257.585 45.4502ZM429.303 132.451C448.272 157.928 461.749 187.736 467.983 220.121L467.382 222.064L467.262 222.402C467.129 222.762 466.888 223.387 466.515 224.252C465.767 225.982 464.488 228.676 462.484 232.135C458.481 239.045 451.558 249.052 440.139 260.563C434.832 265.913 428.534 271.605 421.081 277.476C421.607 272.1 421.88 266.65 421.88 261.136C421.88 243.312 419.064 226.145 413.855 210.056L429.303 132.451Z" fill="url(#paint1_linear_hdr)"/><g clip-path="url(#clip2_hdr)"><path d="M314.108 190.667L219.924 185.484C211.224 185.005 206.559 174.145 213.277 170.011L409.359 49.3027C415.687 45.4094 425.167 52.0137 423.712 59.3081L378.564 286.131C377.026 293.859 365.263 293.271 361.776 285.286L323.191 196.978C321.645 193.436 317.963 190.878 314.11 190.664L314.108 190.667Z" fill="url(#paint2_linear_hdr)" stroke="url(#paint3_linear_hdr)" stroke-width="12.4972" stroke-miterlimit="10"/></g><path d="M366.799 382.749C379.053 374.465 387.34 373.281 394.169 373.648C397.961 373.852 401.514 374.542 405.907 375.349C410.097 376.118 415.046 376.99 420.437 376.99C427.938 376.99 435.46 375.797 442.36 374.101C417.333 417.592 376.573 455.9 319.424 468.997C215.362 492.844 146.565 460.231 105.63 419.587C112.452 417.517 120.01 415.386 127.381 413.581C134.291 411.889 140.873 410.524 146.443 409.751C152.321 408.935 156.021 408.939 157.723 409.287C164.672 410.709 168.806 413.587 176.841 417.604C184.74 421.554 194.177 425.146 208.624 425.146C224.347 425.146 238.045 416.403 248.5 410.383C260.084 403.714 268.789 399.523 278.187 400.785C305.723 404.484 336.266 403.391 366.799 382.749ZM468.594 238C476.796 266.025 472.332 308.339 454.697 349.424C446.092 353.02 432.804 357.414 420.437 357.414C417.018 357.414 413.646 356.867 409.443 356.095C405.444 355.36 400.53 354.386 395.22 354.101C383.843 353.489 371.379 356.024 355.835 366.532C330.772 383.476 305.719 384.732 280.792 381.384C263.958 379.123 249.759 387.069 238.732 393.418C226.578 400.416 217.958 405.57 208.624 405.57C198.015 405.57 191.594 403.095 185.595 400.095C179.73 397.163 171.923 392.211 161.646 390.108C156.457 389.047 149.925 389.504 143.752 390.361C137.272 391.261 129.982 392.79 122.727 394.566C111.612 397.287 100.188 400.686 91.1895 403.598C80.4809 390.353 72.4603 376.928 66.8936 364.853C110.744 380.905 224.953 378.08 304.547 353.498C446.277 309.725 468.594 238 468.594 238Z" fill="url(#paint4_linear_hdr)"/><path fill-rule="evenodd" clip-rule="evenodd" d="M181.608 356.733C181.608 356.733 126.084 309.971 126.084 263.959C126.084 247.736 132.528 232.178 143.999 220.707C155.47 209.236 171.028 202.792 187.251 202.792C203.473 202.792 219.031 209.236 230.502 220.707C241.973 232.178 248.417 247.736 248.417 263.959C248.417 309.971 192.893 356.733 192.893 356.733C189.804 359.577 184.72 359.547 181.608 356.733ZM187.251 290.719C190.765 290.719 194.245 290.027 197.491 288.682C200.738 287.337 203.688 285.366 206.173 282.881C208.658 280.396 210.629 277.446 211.974 274.199C213.319 270.953 214.011 267.473 214.011 263.959C214.011 260.444 213.319 256.965 211.974 253.718C210.629 250.471 208.658 247.521 206.173 245.036C203.688 242.551 200.738 240.58 197.491 239.235C194.245 237.89 190.765 237.198 187.251 237.198C180.153 237.198 173.347 240.018 168.328 245.036C163.31 250.055 160.49 256.861 160.49 263.959C160.49 271.056 163.31 277.863 168.328 282.881C173.347 287.9 180.153 290.719 187.251 290.719Z" fill="url(#paint5_linear_hdr)"/></g><defs><linearGradient id="paint0_linear_hdr" x1="45.5" y1="10" x2="438.5" y2="539.75" gradientUnits="userSpaceOnUse"><stop stop-color="#2693FF"/><stop offset="1" stop-color="#00478D"/></linearGradient><linearGradient id="paint1_linear_hdr" x1="28.1129" y1="201.018" x2="480.37" y2="201.018" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#A6D1E3"/></linearGradient><linearGradient id="paint2_linear_hdr" x1="253.224" y1="205.625" x2="414.143" y2="28.0725" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="0.44" stop-color="#A9D3E4"/><stop offset="1" stop-color="#A6D1E3"/></linearGradient><linearGradient id="paint3_linear_hdr" x1="266.769" y1="81.8099" x2="443.378" y2="205.629" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#A6D1E3"/></linearGradient><linearGradient id="paint4_linear_hdr" x1="55.1386" y1="357.542" x2="484.315" y2="357.542" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#A6D1E3"/></linearGradient><linearGradient id="paint5_linear_hdr" x1="122.539" y1="280.823" x2="251.962" y2="280.823" gradientUnits="userSpaceOnUse"><stop stop-color="white"/><stop offset="1" stop-color="#A6D1E3"/></linearGradient><clipPath id="clip0_hdr"><rect width="512" height="512" rx="100" fill="white"/></clipPath><clipPath id="clip1_hdr"><rect width="527.375" height="538.77" fill="white" transform="translate(-7.5 -13.5)"/></clipPath><clipPath id="clip2_hdr"><rect width="215.69" height="239.709" fill="white" transform="translate(335.572 -16.3281) rotate(35.0338)"/></clipPath></defs></svg>
       </span>
       <span class="brand-name">VectorMarine</span>
-      <span class="brand-by"><img src="assets/EsperWave.svg" alt="EsperWave" style="height: 24px; display: block;"></span>
+      <span class="brand-by"><img src="assets/EsperWave.svg" class="esper-logo" id="esperLogoNav" alt="EsperWave" style="height: 24px; display: block;"></span>
     </a>
     <nav class="nav-links" id="navLinks" aria-label="Primary">
       <a href="#vessel">Platform</a>
@@ -181,6 +193,9 @@
       <a href="#collaboration">Collaboration</a>
       <a href="#pricing">Pricing</a>
       <a class="btn btn-primary nav-cta" href="#contact">Get Started</a>
+      <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode" style="background: none; border: none; cursor: pointer; color: var(--muted); display: flex; align-items: center; padding: 4px; margin-left: 10px;">
+        <svg class="ico" id="themeIcon" aria-hidden="true" style="width: 20px; height: 20px;"><use href="#i-moon"/></svg>
+      </button>
     </nav>
     <button class="nav-toggle" id="navToggle" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
       <span></span><span></span>
@@ -198,7 +213,7 @@
     <svg id="fleet" class="fleet-layer" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <linearGradient id="routeGrad" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="#2F7DFF"/><stop offset="1" stop-color="#3CE0FF"/>
+          <stop offset="0" stop-color="var(--route-g1, #00478D)"/><stop offset="1" stop-color="var(--route-g2, #005DFF)"/>
         </linearGradient>
         <radialGradient id="boatPing" cx="0.5" cy="0.5" r="0.5">
           <stop offset="0" stop-color="#3CE0FF" stop-opacity=".7"/><stop offset="1" stop-color="#3CE0FF" stop-opacity="0"/>
@@ -276,6 +291,135 @@
   </div>
 </section>
 
+<!-- ============ COMMUNITY ============ -->
+<section class="section community" id="community">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>The Community</span>
+      <h2 class="reveal">If you leave the dock,<br><span class="ink-soft">you're part of the crew.</span></h2>
+      <p class="section-sub reveal">Add dockmates to build your circle, spin up or join a fleet to share every journey, and stay connected with messaging across the whole crew — all from one connected app.</p>
+    </div>
+
+    <div class="app-showcase">
+
+      <!-- 1 · DOCKMATES — build your circle -->
+      <article class="app-feature reveal">
+        <div class="app-frame">
+          <span class="app-glow" aria-hidden="true"></span>
+          <!-- 
+          <div class="app-screen" role="img" aria-label="Dockmates screen: a list of connected captains and friends with the option to add more.">
+            <div class="app-bar">
+              <span class="app-bar-title">Dockmates</span>
+              <span class="app-chip">24 connected</span>
+            </div>
+            <div class="app-search"><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg><span>Find captains &amp; friends</span></div>
+            <ul class="dm-list">
+              <li class="dm-row">
+                <span class="dm-av" style="--a1:#2F7DFF;--a2:#3CE0FF">MJ</span>
+                <span class="dm-info"><b>Capt. Mara J.</b><i><span class="mc-dot"></span>Online · on the water</i></span>
+                <span class="dm-state ok"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg></span>
+              </li>
+              <li class="dm-row">
+                <span class="dm-av" style="--a1:#5AA0FF;--a2:#9BC2FF">TV</span>
+                <span class="dm-info"><b>Theo Vance</b><i>2.1 nm away · Harbor Point</i></span>
+                <span class="dm-state add"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></span>
+              </li>
+              <li class="dm-row">
+                <span class="dm-av" style="--a1:#2BD49B;--a2:#3CE0FF">DL</span>
+                <span class="dm-info"><b>Dana &amp; the Lark</b><i>Mutual · 6 shared trips</i></span>
+                <span class="dm-state add"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></span>
+              </li>
+            </ul>
+            <button type="button" class="app-cta"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Add a dockmate</button>
+          </div>
+          -->
+          <img src="assets/1-light.png" class="app-screen-img light-only" alt="Dockmates screen">
+          <img src="assets/1-dark.png" class="app-screen-img dark-only" alt="Dockmates screen">
+        </div>
+        <div class="app-caption">
+          <span class="app-tag">Dockmates</span>
+          <h3>Build your circle</h3>
+          <p>Add the captains and friends you ride with, and keep your whole dock one tap away.</p>
+        </div>
+      </article>
+
+      <!-- 2 · FLEETS — share & get insights -->
+      <article class="app-feature reveal" style="--d:.09s">
+        <div class="app-frame">
+          <span class="app-glow" aria-hidden="true"></span>
+          <!--
+          <div class="app-screen" role="img" aria-label="Fleet screen: a group of vessels sharing combined insights including distance, trips, waypoints and weekly activity.">
+            <div class="app-bar">
+              <span class="app-bar-title">Blue Horizon Fleet</span>
+              <span class="fl-live"><span class="mc-dot"></span>3 LIVE</span>
+            </div>
+            <div class="fl-crew">
+              <span class="fl-av" style="--a1:#2F7DFF;--a2:#3CE0FF">MJ</span>
+              <span class="fl-av" style="--a1:#5AA0FF;--a2:#9BC2FF">DL</span>
+              <span class="fl-av" style="--a1:#2BD49B;--a2:#3CE0FF">RT</span>
+              <span class="fl-av more">+5</span>
+              <span class="fl-crew-label">8 vessels · 12 crew</span>
+            </div>
+            <div class="fl-grid">
+              <div class="fl-cell"><span class="fl-k">Fleet distance</span><span class="fl-v">1,204<span class="u">nm</span></span></div>
+              <div class="fl-cell"><span class="fl-k">Shared trips</span><span class="fl-v">47</span></div>
+              <div class="fl-cell"><span class="fl-k">Waypoints</span><span class="fl-v">88</span></div>
+              <div class="fl-cell"><span class="fl-k">Hours logged</span><span class="fl-v">312<span class="u">h</span></span></div>
+            </div>
+            <div class="fl-spark">
+              <div class="fl-spark-top"><span>Fleet activity</span><span class="up">+18% this week</span></div>
+              <div class="fl-spark-bars"><i style="--h:38%"></i><i style="--h:56%"></i><i style="--h:30%"></i><i style="--h:72%"></i><i style="--h:48%"></i><i style="--h:88%"></i><i style="--h:66%"></i></div>
+            </div>
+          </div>
+          -->
+          <img src="assets/2-light.png" class="app-screen-img light-only" alt="Fleet screen">
+          <img src="assets/2-dark.png" class="app-screen-img dark-only" alt="Fleet screen">
+        </div>
+        <div class="app-caption">
+          <span class="app-tag">Fleets</span>
+          <h3>Create or join a fleet</h3>
+          <p>Group up, share every trip, and see the whole fleet's insights — distance, waypoints and live vessels — in one view.</p>
+        </div>
+      </article>
+
+      <!-- 3 · MESSAGING — stay connected -->
+      <article class="app-feature reveal" style="--d:.18s">
+        <div class="app-frame">
+          <span class="app-glow" aria-hidden="true"></span>
+          <!--
+          <div class="app-screen" role="img" aria-label="Messaging screen: a live conversation with a crew, including a shared live-location card and a message input.">
+            <div class="app-bar">
+              <span class="msg-head">
+                <span class="dm-av sm" style="--a1:#2BD49B;--a2:#3CE0FF">LK</span>
+                <span class="msg-head-txt"><b>The Lark crew</b><i><span class="mc-dot"></span>3 online</i></span>
+              </span>
+              <svg class="ico app-bar-ico" aria-hidden="true"><use href="#i-chat"/></svg>
+            </div>
+            <div class="chat">
+              <div class="bubble in">Holding at Reef Marker 7 — water's like glass out here.</div>
+              <div class="bubble pin"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg><span><b>Live location</b>Capt. Mara · 1.2 nm out</span></div>
+              <div class="bubble out">On our way — 12 min behind you.</div>
+              <div class="bubble in typing" aria-hidden="true"><span></span><span></span><span></span></div>
+            </div>
+            <div class="msg-input"><span>Message the crew…</span><span class="msg-send"><svg class="ico" aria-hidden="true"><use href="#i-send"/></svg></span></div>
+          </div>
+          -->
+          <img src="assets/3-light.png" class="app-screen-img light-only" alt="Messaging screen">
+          <img src="assets/3-dark.png" class="app-screen-img dark-only" alt="Messaging screen">
+        </div>
+        <div class="app-caption">
+          <span class="app-tag">Messaging</span>
+          <h3>Stay connected</h3>
+          <p>Message any dockmate or your whole fleet, drop a live location, and keep the crew together from dock to horizon.</p>
+        </div>
+      </article>
+
+    </div>
+
+    <p class="community-foot reveal">If your hull is in the water,<br><span class="ink-soft">you belong here.</span></p>
+  </div>
+</section>
+
 <!-- ============ DATABRIDGE ============ -->
 <section class="section vessel" id="vessel">
   <div class="container grid-2">
@@ -284,7 +428,7 @@
       <h2 class="reveal">Your vessel. <span class="ink-soft">Connected.</span></h2>
       <p class="lede reveal">
         The VectorMarine DataBridge connects directly to your vessel and continuously streams
-        operational data into the <img src="assets/EsperWave.svg" alt="EsperWave" style="height: 1.2em; vertical-align: middle; display: inline-block; transform: translateY(-2px);"> ecosystem.
+        operational data into the <img src="assets/EsperWave.svg" class="esper-logo" alt="EsperWave" style="height: 1.2em; vertical-align: middle; display: inline-block; transform: translateY(-2px);"> ecosystem.
       </p>
       <div class="monitor-grid reveal">
         <div class="monitor"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Position</div>
@@ -295,6 +439,7 @@
         <div class="monitor"><svg class="ico" aria-hidden="true"><use href="#i-depth"/></svg>Depth</div>
         <div class="monitor"><svg class="ico" aria-hidden="true"><use href="#i-route"/></svg>Trips</div>
         <div class="monitor"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Waypoints</div>
+        <div class="monitor more-tag"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Even more</div>
       </div>
       <p class="muted reveal">All from a single platform.</p>
     </div>
@@ -302,20 +447,23 @@
     <div class="vessel-visual reveal" data-parallax="0.1">
       <div class="device-stage">
         <div class="device-shadow"></div>
+        <!--
         <svg viewBox="0 0 260 320" class="device" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="VectorMarine DataBridge device">
           <defs>
-            <linearGradient id="devBody" x1="46" y1="46" x2="214" y2="274"><stop stop-color="#121D33"/><stop offset="1" stop-color="#0B1220"/></linearGradient>
-            <linearGradient id="devScreen" x1="66" y1="70" x2="194" y2="156"><stop stop-color="#070B14"/><stop offset="1" stop-color="#0D1627"/></linearGradient>
+            <linearGradient id="devBody" x1="46" y1="46" x2="214" y2="274"><stop stop-color="var(--device-body-1)"/><stop offset="1" stop-color="var(--device-body-2)"/></linearGradient>
+            <linearGradient id="devScreen" x1="66" y1="70" x2="194" y2="156"><stop stop-color="var(--device-screen-1)"/><stop offset="1" stop-color="var(--device-screen-2)"/></linearGradient>
           </defs>
-          <rect x="46" y="46" width="168" height="228" rx="26" fill="url(#devBody)" stroke="#1F3354" stroke-width="1.4"/>
+          <rect x="46" y="46" width="168" height="228" rx="26" fill="url(#devBody)" stroke="var(--device-stroke)" stroke-width="1.4"/>
           <rect x="66" y="70" width="128" height="86" rx="12" fill="url(#devScreen)"/>
-          <polyline class="dev-wave" points="74,128 90,116 106,134 122,104 138,124 154,98 170,122 186,110" fill="none" stroke="#65A8FF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="78" cy="86" r="2.6" fill="#65A8FF"/><rect x="88" y="83" width="42" height="5" rx="2.5" fill="rgba(255,255,255,0.15)"/>
-          <circle class="dev-led" cx="80" cy="184" r="6" fill="#3CE0FF"/>
-          <rect x="96" y="180" width="98" height="8" rx="4" fill="#1C2E4E"/><rect x="96" y="180" width="58" height="8" rx="4" fill="#2F7DFF"/>
-          <rect x="66" y="206" width="128" height="48" rx="12" fill="#17253F" stroke="#253D66"/>
-          <circle cx="92" cy="230" r="9" fill="#1F3354" stroke="#2D4C7C"/><circle cx="130" cy="230" r="9" fill="#1F3354" stroke="#2D4C7C"/><circle cx="168" cy="230" r="9" fill="#1F3354" stroke="#2D4C7C"/>
+          <polyline class="dev-wave" points="74,128 90,116 106,134 122,104 138,124 154,98 170,122 186,110" fill="none" stroke="var(--cyan)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="78" cy="86" r="2.6" fill="var(--cyan)"/><rect x="88" y="83" width="42" height="5" rx="2.5" fill="var(--glass)"/>
+          <circle class="dev-led" cx="80" cy="184" r="6" fill="var(--cyan)"/>
+          <rect x="96" y="180" width="98" height="8" rx="4" fill="var(--device-stroke)"/><rect x="96" y="180" width="58" height="8" rx="4" fill="var(--accent)"/>
+          <rect x="66" y="206" width="128" height="48" rx="12" fill="var(--device-panel)" stroke="var(--device-panel-stroke)"/>
+          <circle cx="92" cy="230" r="9" fill="var(--device-stroke)" stroke="var(--device-panel-stroke)"/><circle cx="130" cy="230" r="9" fill="var(--device-stroke)" stroke="var(--device-panel-stroke)"/><circle cx="168" cy="230" r="9" fill="var(--device-stroke)" stroke="var(--device-panel-stroke)"/>
         </svg>
+        -->
+        <img src="assets/NMEA.png" class="device" alt="VectorMarine DataBridge device">
         <span class="orbit-chip c1"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg>Position</span>
         <span class="orbit-chip c2"><svg class="ico" aria-hidden="true"><use href="#i-depth"/></svg>Depth</span>
         <span class="orbit-chip c3"><svg class="ico" aria-hidden="true"><use href="#i-battery"/></svg>Battery</span>
@@ -378,7 +526,7 @@
       <div class="timeline-line"><span class="timeline-progress" id="tlProgress"></span></div>
       <ol>
         <li class="step reveal"><span class="step-node">01</span><div class="step-body"><h3>Install DataBridge</h3><p>Mount the VectorMarine DataBridge on your vessel.</p></div></li>
-        <li class="step reveal"><span class="step-node">02</span><div class="step-body"><h3>Connect to <img src="assets/EsperWave.svg" alt="EsperWave" style="height: 1.2em; vertical-align: middle; display: inline-block; margin-left: 2px;"></h3><p>Pair your vessel once.</p></div></li>
+        <li class="step reveal"><span class="step-node">02</span><div class="step-body"><h3>Connect to VectorMarine</h3><p>Pair your vessel once.</p></div></li>
         <li class="step reveal"><span class="step-node">03</span><div class="step-body"><h3>Go anywhere</h3><p>Trips automatically begin recording.</p></div></li>
         <li class="step reveal"><span class="step-node">04</span><div class="step-body"><h3>Capture intelligence</h3><p>Create waypoints and observations.</p></div></li>
         <li class="step reveal"><span class="step-node">05</span><div class="step-body"><h3>Collaborate</h3><p>Invite crew members, borrow vessels, or ride along.</p></div></li>
@@ -486,7 +634,7 @@
     </div>
     <div class="ride-copy">
       <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Ride Along</span>
-      <h2 class="reveal">Shared trips. <span class="ink-soft">One source of truth.</span></h2>
+      <h2 class="reveal">Shared trips.<br><span class="ink-soft">One source of truth.</span></h2>
       <p class="lede reveal">Invite friends and crew members onto active trips.</p>
       <p class="muted reveal">Participants can:</p>
       <ul class="check-list reveal">
@@ -535,8 +683,6 @@
         <ul class="price-feats">
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Access to the community network</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>View public vessel activity</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Create and save waypoints</li>
-          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Basic trip tracking</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Explore maps and fishing intel</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Join discussions and groups</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Receive platform updates</li>
@@ -544,6 +690,8 @@
         
         <div class="price-section-title">Not Included</div>
         <ul class="price-feats">
+          <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Create and save waypoints</li>
+          <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Basic trip tracking</li>
           <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Add your own vessel</li>
           <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Personal vessel data storage</li>
           <li class="disabled"><svg class="ico" aria-hidden="true"><use href="#i-cross"/></svg>Advanced vessel management</li>
@@ -570,6 +718,8 @@
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Create a personalized vessel profile</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Store and organize vessel data</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Build your own trip history</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Create and save waypoints</li>
+          <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Basic trip tracking</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Advanced member tools</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Enhanced vessel management</li>
           <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Access future premium member features</li>
@@ -664,7 +814,7 @@
       <h2 class="reveal">Questions, answered.</h2>
     </div>
     <div class="faq-list">
-      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What is VectorMarine?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>VectorMarine is a connected vessel intelligence platform powered by <img src="assets/EsperWave.svg" alt="EsperWave" style="height: 2.2em; vertical-align: middle; display: inline-block; transform: translateY(-2px);">.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What is VectorMarine?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>VectorMarine is a connected vessel intelligence platform powered by <img src="assets/EsperWave.svg" class="esper-logo" alt="EsperWave" style="height: 2.2em; vertical-align: middle; display: inline-block; transform: translateY(-2px);">.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Do I need a DataBridge?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. The DataBridge enables live telemetry and vessel communication.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Can I share my vessel?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. Vessel owners can temporarily lend access while maintaining ownership.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What happens when a vessel is borrowed?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Ownership remains unchanged while operational access is temporarily transferred.</p></div></div>
@@ -681,7 +831,10 @@
     <h2 class="reveal about-title">We believe the water should be connected.</h2>
     <p class="lede center-lede reveal">VectorMarine was created to simplify how captains, crews, and fleets interact with their vessels.</p>
     <p class="muted reveal">By combining connected hardware with intelligent software, we help people spend less time managing technology and more time on the water.</p>
-    <p class="about-foot reveal">Powered by <img src="assets/EsperWave.svg" alt="EsperWave" style="height: 2.6em; vertical-align: middle; display: inline-block; transform: translateY(-2px);"> · Built for modern marine operations</p>
+    <div class="hero-actions reveal" style="justify-content:center; margin-top:28px; margin-bottom:36px;">
+      <a class="btn btn-primary" href="about.html">Meet the Crew</a>
+    </div>
+    <p class="about-foot reveal">Powered by <img src="assets/EsperWave.svg" class="esper-logo" alt="EsperWave" style="height: 2.6em; vertical-align: middle; display: inline-block; transform: translateY(-2px);"> · Built for modern marine operations</p>
   </div>
 </section>
 
@@ -717,7 +870,7 @@
         <span class="brand-name">VectorMarine</span>
       </a>
       <p class="footer-tag">The Connected Operating System For Modern Boating.</p>
-      <p class="footer-power">Powered by <img src="assets/EsperWave.svg" alt="EsperWave" style="height: 32px; vertical-align: middle; display: inline-block; margin-left: 4px;"></p>
+      <p class="footer-power">Powered by <img src="assets/EsperWave.svg" class="esper-logo" alt="EsperWave" style="height: 32px; vertical-align: middle; display: inline-block; margin-left: 4px;"></p>
     </div>
     <nav class="footer-cols" aria-label="Footer">
       <div><h4>Platform</h4><a href="#vessel">DataBridge</a><a href="#capabilities">Features</a><a href="#how">How it works</a></div>
@@ -727,10 +880,42 @@
   </div>
   <div class="container footer-bottom">
     <span>© 2026 VectorMarine. All rights reserved.</span>
-    <span>Powered by <img src="assets/EsperWave.svg" alt="EsperWave" style="height: 2.2em; vertical-align: middle; display: inline-block; margin-left: 4px; transform: translateY(-2px);"></span>
+    <span>Powered by <img src="assets/EsperWave.svg" class="esper-logo" id="esperLogoFooter" alt="EsperWave" style="height: 2.2em; vertical-align: middle; display: inline-block; margin-left: 4px; transform: translateY(-2px);"></span>
   </div>
 </footer>
 
+<script>
+  // Theme Toggle Logic
+  const themeToggle = document.getElementById('themeToggle');
+  const themeIcon = document.getElementById('themeIcon');
+  const logoNav = document.getElementById('esperLogoNav');
+  const logoFooter = document.getElementById('esperLogoFooter');
+  const root = document.documentElement;
+  
+  function updateIcon(theme) {
+    if (theme === 'dark') {
+      themeIcon.innerHTML = '<use href="#i-sun"/>';
+      document.querySelectorAll('.esper-logo').forEach(img => img.src = 'assets/EsperWave.svg');
+    } else {
+      themeIcon.innerHTML = '<use href="#i-moon"/>';
+      document.querySelectorAll('.esper-logo').forEach(img => img.src = 'assets/EsperWave-light.svg');
+    }
+  }
+
+  // Initial state
+  const currentTheme = localStorage.getItem('theme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+  updateIcon(currentTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const isDark = root.getAttribute('data-theme') === 'dark' || 
+                   (!root.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    
+    const newTheme = isDark ? 'light' : 'dark';
+    root.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+    updateIcon(newTheme);
+  });
+</script>
 <script src="assets/js/main.js" defer></script>
 </body>
 </html>

@@ -44,7 +44,7 @@
   const reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduce) {
     document
-      .querySelectorAll('.feature-grid, .usecase-grid, .price-grid, .trust-row, .faq-list, .monitor-grid, .check-list, .everything-list, .hero-meta')
+      .querySelectorAll('.feature-grid, .usecase-grid, .price-grid, .trust-row, .faq-list, .monitor-grid, .check-list, .everything-list, .hero-meta, .app-showcase, .stat-band, .team-grid')
       .forEach((group) => {
         Array.from(group.children).forEach((el, i) => {
           if (el.classList.contains('reveal')) el.style.setProperty('--d', Math.min(i * 0.06, 0.42) + 's');
@@ -188,6 +188,43 @@
     { id: 'VM-05', name: 'Tide Runner', cls: 'Fishing · 38ft',     d: 'M556 566 C 720 604 822 704 984 722 S 1244 702 1366 624', speed: 16.1, heading: 121, depth: 34.7, temp: 21.0, wpt: 'Fishing Ground B',  wpts: [[984, 722], [1244, 702]], spd: 0.050, ph: 0.42 },
   ];
 
+  if (window.location.pathname.includes('about.html')) {
+    // Clear the default long-distance routes
+    FLEET.length = 0; 
+    
+    // Safe water coordinates distributed across the oceans (1440x900 scale)
+    const waterCoords = [
+      // Pacific Ocean
+      [150, 450], [200, 300], [250, 600], [150, 650], [100, 400], 
+      [1200, 400], [1300, 500], [1250, 600], [1350, 650], [1400, 550],
+      // Atlantic Ocean
+      [450, 300], [550, 400], [500, 500], [450, 600], [550, 650], 
+      [600, 500], [650, 650], [400, 400], [420, 500],
+      // Indian Ocean
+      [950, 550], [1000, 650], [900, 600], [1050, 600], [850, 650], [1100, 550],
+      // Southern Ocean
+      [300, 800], [500, 800], [700, 820], [900, 800], [1100, 820],
+      // Arctic/North
+      [600, 200], [700, 250], [800, 200]
+    ];
+
+    waterCoords.forEach((coord, i) => {
+      // Create a short random drift path for each vessel
+      const dx = coord[0] + (Math.random() * 40 - 20);
+      const dy = coord[1] + (Math.random() * 40 - 20);
+      FLEET.push({
+        id: 'SCATTER-' + i,
+        name: 'Vessel ' + i,
+        cls: 'Transport',
+        speed: 10, heading: 90, depth: 0, temp: 15, wpt: 'Drifting',
+        wpts: [],
+        d: `M${coord[0]} ${coord[1]} L${dx.toFixed(1)} ${dy.toFixed(1)}`,
+        ph: Math.random(),
+        spd: 0.005 + (Math.random() * 0.01) // Extremely slow drift speed
+      });
+    });
+  }
+
   const el = (name, attrs) => {
     const n = document.createElementNS(SVGNS, name);
     for (const k in attrs) n.setAttribute(k, attrs[k]);
@@ -225,7 +262,11 @@
       const move = el('g', { class: 'boat-move' });
       move.appendChild(el('circle', { class: 'boat-glow', r: 24 }));
       move.appendChild(el('path', { class: 'boat-reticle', d: 'M-15 -15 h7 M15 -15 h-7 M-15 15 h7 M15 15 h-7 M-15 -15 v7 M15 -15 v7 M-15 15 v-7 M15 15 v-7' }));
-      move.appendChild(el('use', { class: 'boat-body-detailed', href: '#vessel-detailed', x: '-5', y: '-11.14', width: '10', height: '22.27' }));
+      let bx = '-5', by = '-11.14', bw = '10', bh = '22.27';
+      if (window.location.pathname.includes('about.html')) {
+        bx = '-3'; by = '-6.68'; bw = '6'; bh = '13.36'; // very tiny scale
+      }
+      move.appendChild(el('use', { class: 'boat-body-detailed', href: '#vessel-detailed', x: bx, y: by, width: bw, height: bh }));
       move.appendChild(el('circle', { class: 'boat-hit', r: 28 }));
       const tag = el('text', { class: 'boat-tag' });
       tag.textContent = v.name;
@@ -355,21 +396,30 @@
     const cx = () => W * 0.62, cy = () => H * 0.46; // sonar origin (command deck)
 
     const draw = (now) => {
+      const isLight = document.documentElement.getAttribute('data-theme') === 'light' || 
+                      (!document.documentElement.hasAttribute('data-theme') && !window.matchMedia('(prefers-color-scheme: dark)').matches);
+                      
       const time = (now - t0) / 1000;
       ctx.clearRect(0, 0, W, H);
 
       // base depth wash
       const g = ctx.createRadialGradient(cx(), cy(), 40, cx(), cy(), Math.max(W, H) * 0.9);
-      g.addColorStop(0, 'rgba(20,52,104,0.55)');
-      g.addColorStop(0.5, 'rgba(8,20,46,0.40)');
-      g.addColorStop(1, 'rgba(4,7,16,0)');
+      if (isLight) {
+        g.addColorStop(0, 'rgba(226,232,240,0.8)'); // slate-200
+        g.addColorStop(0.5, 'rgba(241,245,249,0.6)'); // slate-100
+        g.addColorStop(1, 'rgba(248,250,252,0)');
+      } else {
+        g.addColorStop(0, 'rgba(20,52,104,0.55)');
+        g.addColorStop(0.5, 'rgba(8,20,46,0.40)');
+        g.addColorStop(1, 'rgba(4,7,16,0)');
+      }
       ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
 
       // moonlit current ripples
       const bands = [
-        { off: 0.30, amp: 16, len: 0.0062, sp: 0.45, c: 'rgba(60,120,220,0.06)' },
-        { off: 0.52, amp: 13, len: 0.0090, sp: 0.70, c: 'rgba(47,125,255,0.06)' },
-        { off: 0.74, amp: 11, len: 0.0125, sp: 1.05, c: 'rgba(90,170,255,0.05)' },
+        { off: 0.30, amp: 16, len: 0.0062, sp: 0.45, c: isLight ? 'rgba(51,65,85,0.04)' : 'rgba(60,120,220,0.06)' },
+        { off: 0.52, amp: 13, len: 0.0090, sp: 0.70, c: isLight ? 'rgba(51,65,85,0.04)' : 'rgba(47,125,255,0.06)' },
+        { off: 0.74, amp: 11, len: 0.0125, sp: 1.05, c: isLight ? 'rgba(51,65,85,0.03)' : 'rgba(90,170,255,0.05)' },
       ];
       bands.forEach((L) => {
         ctx.beginPath();
@@ -384,7 +434,7 @@
       const ang = (time * 0.5) % (Math.PI * 2);
       const R = Math.max(W, H) * 0.7;
       const sg = ctx.createLinearGradient(cx(), cy(), cx() + Math.cos(ang) * R, cy() + Math.sin(ang) * R);
-      sg.addColorStop(0, 'rgba(60,224,255,0.12)');
+      sg.addColorStop(0, isLight ? 'rgba(47,125,255,0.06)' : 'rgba(60,224,255,0.12)');
       sg.addColorStop(1, 'rgba(60,224,255,0)');
       ctx.beginPath();
       ctx.moveTo(cx(), cy());
@@ -399,7 +449,7 @@
         if (age >= 1) return false;
         ctx.beginPath();
         ctx.arc(cx(), cy(), age * R * 0.9, 0, Math.PI * 2);
-        ctx.strokeStyle = `rgba(60,224,255,${(0.18 * (1 - age)).toFixed(3)})`;
+        ctx.strokeStyle = isLight ? `rgba(47,125,255,${(0.12 * (1 - age)).toFixed(3)})` : `rgba(60,224,255,${(0.18 * (1 - age)).toFixed(3)})`;
         ctx.lineWidth = 1.2; ctx.stroke();
         return true;
       });
@@ -412,7 +462,7 @@
         const a = p.a * (0.55 + 0.45 * Math.sin(p.tw));
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(150,205,255,${a.toFixed(3)})`;
+        ctx.fillStyle = isLight ? `rgba(148,163,184,${(a * 0.6).toFixed(3)})` : `rgba(150,205,255,${a.toFixed(3)})`;
         ctx.fill();
       });
 
@@ -425,17 +475,25 @@
     } else startLoop();
   }
 
-  // static single-paint water for mobile / reduced-motion
   function paintWaterStatic() {
+    const isLight = document.documentElement.getAttribute('data-theme') === 'light' || 
+                    (!document.documentElement.hasAttribute('data-theme') && !window.matchMedia('(prefers-color-scheme: dark)').matches);
+                    
     const ctx = seaCanvas.getContext('2d');
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
     const W = seaCanvas.clientWidth, H = seaCanvas.clientHeight;
     seaCanvas.width = W * DPR; seaCanvas.height = H * DPR;
     ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
     const g = ctx.createRadialGradient(W * 0.6, H * 0.4, 30, W * 0.6, H * 0.4, Math.max(W, H));
-    g.addColorStop(0, 'rgba(20,52,104,0.5)');
-    g.addColorStop(0.55, 'rgba(8,20,46,0.32)');
-    g.addColorStop(1, 'rgba(4,7,16,0)');
+    if (isLight) {
+      g.addColorStop(0, 'rgba(226,232,240,0.8)');
+      g.addColorStop(0.55, 'rgba(241,245,249,0.6)');
+      g.addColorStop(1, 'rgba(248,250,252,0)');
+    } else {
+      g.addColorStop(0, 'rgba(20,52,104,0.5)');
+      g.addColorStop(0.55, 'rgba(8,20,46,0.32)');
+      g.addColorStop(1, 'rgba(4,7,16,0)');
+    }
     ctx.fillStyle = g; ctx.fillRect(0, 0, W, H);
   }
 
