@@ -44,7 +44,7 @@
   const reveals = document.querySelectorAll('.reveal');
   if ('IntersectionObserver' in window && !reduce) {
     document
-      .querySelectorAll('.feature-grid, .usecase-grid, .price-grid, .trust-row, .faq-list, .monitor-grid, .check-list, .everything-list, .hero-meta, .app-showcase, .stat-band, .team-grid')
+      .querySelectorAll('.feature-grid, .usecase-grid, .price-grid, .trust-row, .faq-list, .monitor-grid, .check-list, .everything-list, .hero-meta, .app-showcase, .stat-band, .team-grid, .app-feed-body')
       .forEach((group) => {
         Array.from(group.children).forEach((el, i) => {
           if (el.classList.contains('reveal')) el.style.setProperty('--d', Math.min(i * 0.06, 0.42) + 's');
@@ -118,27 +118,82 @@
   /* -------------------------------------------------
      HOW IT WORKS — scroll progress + step activation
   ------------------------------------------------- */
-  const timeline = document.getElementById('timeline');
-  const progress = document.getElementById('tlProgress');
-  const steps = Array.from(document.querySelectorAll('.step'));
-  if (timeline && progress && !reduce) {
+  const timelines = document.querySelectorAll('.timeline');
+  if (timelines.length && !reduce) {
     let ticking = false;
     const update = () => {
-      const r = timeline.getBoundingClientRect();
       const vh = window.innerHeight;
-      const total = r.height;
-      const passed = Math.min(Math.max(vh * 0.55 - r.top, 0), total);
-      progress.style.height = (passed / total) * 100 + '%';
-      const mark = vh * 0.62;
-      steps.forEach((s) => {
-        const sr = s.getBoundingClientRect();
-        s.classList.toggle('active', sr.top < mark && sr.bottom > vh * 0.2);
+      timelines.forEach(timeline => {
+        const progress = timeline.querySelector('.timeline-progress');
+        const steps = Array.from(timeline.querySelectorAll('.step'));
+        
+        const r = timeline.getBoundingClientRect();
+        const total = r.height;
+        const passed = Math.min(Math.max(vh * 0.55 - r.top, 0), total);
+        if (progress) progress.style.height = (passed / total) * 100 + '%';
+        
+        const mark = vh * 0.62;
+        steps.forEach((s) => {
+          const sr = s.getBoundingClientRect();
+          s.classList.toggle('active', sr.top < mark && sr.bottom > vh * 0.2);
+        });
       });
       ticking = false;
     };
     window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(update); ticking = true; } }, { passive: true });
     window.addEventListener('resize', update);
     update();
+  }
+
+  /* -------------------------------------------------
+     S-Curve SVG Route Tracer (Trip Logging)
+  ------------------------------------------------- */
+  const sCurveContainer = document.getElementById('s-curve-container');
+  if (sCurveContainer && !reduce) {
+    const sPath = document.getElementById('s-route-path');
+    const sVessel = document.getElementById('s-vessel');
+    const sSteps = Array.from(sCurveContainer.querySelectorAll('.s-step'));
+    
+    if (sPath && sVessel) {
+      const pathLen = sPath.getTotalLength();
+      sPath.style.strokeDasharray = pathLen;
+      sPath.style.strokeDashoffset = pathLen;
+      
+      let ticking = false;
+      const updateSCurve = () => {
+        const r = sCurveContainer.getBoundingClientRect();
+        const vh = window.innerHeight;
+        const start = vh * 0.5;
+        const total = r.height;
+        const passed = Math.min(Math.max(start - r.top, 0), total);
+        const progress = passed / total; 
+        
+        sPath.style.strokeDashoffset = pathLen * (1 - progress);
+        
+        if (progress > 0 && progress < 0.98) {
+          sVessel.style.opacity = 1;
+          const pt = sPath.getPointAtLength(progress * pathLen);
+          sVessel.style.left = (pt.x / 1200) * 100 + '%';
+          sVessel.style.top = (pt.y / 1300) * 100 + '%';
+          
+          const pt2 = sPath.getPointAtLength(Math.min(progress + 0.01, 1) * pathLen);
+          const ang = (Math.atan2(pt2.y - pt.y, pt2.x - pt.x) * 180) / Math.PI + 90;
+          sVessel.style.transform = `translate(-50%, -50%) rotate(${ang}deg)`;
+        } else {
+          sVessel.style.opacity = 0;
+        }
+        
+        sSteps.forEach((s) => {
+          const sr = s.getBoundingClientRect();
+          s.classList.toggle('active', sr.top < vh * 0.65 && sr.bottom > vh * 0.2);
+        });
+        
+        ticking = false;
+      };
+      window.addEventListener('scroll', () => { if (!ticking) { requestAnimationFrame(updateSCurve); ticking = true; } }, { passive: true });
+      window.addEventListener('resize', updateSCurve);
+      updateSCurve();
+    }
   }
 
   /* -------------------------------------------------
@@ -550,11 +605,33 @@
      CARD spotlight — pointer-follow glow
   ------------------------------------------------- */
   if (canHover) {
-    document.querySelectorAll('.feature-card').forEach((card) => {
+    document.querySelectorAll('.feature-card, .bento-card').forEach((card) => {
       card.addEventListener('pointermove', (e) => {
         const r = card.getBoundingClientRect();
         card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
         card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      });
+    });
+  }
+
+  /* -------------------------------------------------
+     NAVIGATE WITH CONFIDENCE — Map Layers Toggle
+  ------------------------------------------------- */
+  const layerTabs = document.querySelectorAll('.layer-btn');
+  const layerMapTerminal = document.querySelector('.layer-map-terminal');
+  if (layerTabs.length && layerMapTerminal) {
+    layerTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        // Remove active class from all tabs
+        layerTabs.forEach(t => t.classList.remove('active'));
+        // Add active class to clicked tab
+        tab.classList.add('active');
+        
+        // Update the data attribute on the map container
+        const layerType = tab.getAttribute('data-layer');
+        if (layerType) {
+          layerMapTerminal.setAttribute('data-active-layer', layerType);
+        }
       });
     });
   }

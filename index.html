@@ -51,6 +51,7 @@
     <symbol id="i-cross" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
     <symbol id="i-dash" viewBox="0 0 24 24"><path d="M5 12h14"/></symbol>
     <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-fish" viewBox="0 0 24 24"><path d="M20 12c-4-4-9-4-13 0l-5-4v8l5-4c4 4 9 4 13 0Z"/><circle cx="15" cy="11" r="1" fill="currentColor" stroke="none"/></symbol>
     <symbol id="i-send" viewBox="0 0 24 24"><path d="M21 4L3 11l6.5 2.5L12 20l3-7 6-9Z"/><path d="M9.5 13.5L21 4"/></symbol>
     <symbol id="i-chat" viewBox="0 0 24 24"><path d="M5 5h14a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H10l-4 3v-3H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2Z"/></symbol>
     <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></symbol>
@@ -239,13 +240,12 @@
 
   <div class="hero-grid container">
     <div class="hero-copy">
-      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Connected Marine Intelligence</span>
+      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>What is VectorMarine?</span>
       <h1 class="hero-title reveal" style="font-weight: 600;">
-        Every vessel.<br><span class="ink-soft" style="white-space: nowrap;">Every trip. Every moment.</span>
+        Your Digital<br>Captain's Log.
       </h1>
       <p class="hero-sub reveal">
-        VectorMarine turns your fleet into a connected marine intelligence platform — live telemetry,
-        automatic trip logging, smart waypoints, and real-time collaboration, on one command deck.
+        Automatically record every trip, remember every fishing spot, capture every catch, and explore the water with powerful marine intelligence—all from one app.
       </p>
       <div class="hero-actions reveal">
         <a class="btn btn-primary btn-lg" href="#contact">Install for iOS/Android</a>
@@ -291,25 +291,222 @@
   </div>
 </section>
 
+<!-- ============ WHY VECTORMARINE ============ -->
+<section class="section why-vectormarine" id="why">
+  <div class="container">
+    <div class="section-head" style="text-align: center;">
+      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Why VectorMarine?</span>
+      <h2 class="reveal" style="font-weight: 600;">More Than Just Another<br><span class="ink-soft">Marine App.</span></h2>
+      <p class="section-sub reveal" style="max-width: 680px; margin: 0 auto; padding-top: 12px; line-height: 1.7;">
+        Most boating apps solve just one problem.<br>
+        <span style="opacity: 0.8; font-size: 0.95em;">One app for weather. Another for charts. Another for trip logging.<br>Another for catch reporting. Another for sharing.</span><br><br>
+        <strong style="color: var(--accent-400); font-weight: 600;">VectorMarine brings everything together in one seamless experience.</strong>
+      </p>
+    </div>
+
+    <div class="bento-grid">
+      <div class="bento-card reveal">
+        <div class="bc-icon"><svg class="ico" aria-hidden="true"><use href="#i-weather"/></svg></div>
+        <h3>Marine Overlays</h3>
+        <p>Access premium marine overlays like wind, currents, sea surface temperature and more—all in one place.</p>
+      </div>
+
+      <div class="bento-card reveal">
+        <div class="bc-icon"><svg class="ico" aria-hidden="true"><use href="#i-route"/></svg></div>
+        <h3>Automatic Trip Logging</h3>
+        <p>Every journey is recorded automatically, so you can focus on the water instead of pressing start and stop.</p>
+      </div>
+
+      <div class="bento-card reveal">
+        <div class="bc-icon"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg></div>
+        <h3>Catch & Waypoint Tracking</h3>
+        <p>Save catches, fishing spots, hazards and observations exactly where they happened.</p>
+      </div>
+
+      <div class="bento-card bento-wide reveal">
+        <div class="bc-icon"><svg class="ico" aria-hidden="true"><use href="#i-fleet"/></svg></div>
+        <h3>Built-In Community</h3>
+        <p>Share trips, discover public activity, borrow vessels and ride along with friends—all without switching apps.</p>
+      </div>
+
+      <div class="bento-card bento-wide reveal">
+        <div class="bc-icon"><svg class="ico" aria-hidden="true"><use href="#i-bridge"/></svg></div>
+        <h3>DataBridge Integration</h3>
+        <p>Connect your vessel for live telemetry, engine data and deeper marine insights.</p>
+      </div>
+    </div>
+    
+    <div class="bento-footer reveal" style="text-align: center; margin-top: 56px;">
+      <h3 style="font-weight: 600; font-size: clamp(1.25rem, 3vw, 1.75rem);">Everything you need on the water. <span style="color: var(--accent-400);">One app. Zero compromises.</span></h3>
+    </div>
+  </div>
+</section>
+
+<!-- ============ NAVIGATE WITH CONFIDENCE ============ -->
+<section class="section layers-section" id="layers">
+  <div class="container">
+    <div class="section-head" style="text-align: center;">
+      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Navigate With Confidence</span>
+      <h2 class="reveal" style="font-weight: 600;">Explore the Water with<br><span class="ink-soft">Marine Intelligence.</span></h2>
+    </div>
+
+    <div class="layers-grid reveal">
+      <div class="layers-tabs">
+        <button class="layer-btn active" data-layer="sst">
+          <svg class="ico" aria-hidden="true"><use href="#i-thermometer"/></svg>
+          <div class="layer-info">
+            <h4>Sea Surface Temp</h4>
+            <p>High-res thermal maps</p>
+          </div>
+        </button>
+        <button class="layer-btn" data-layer="chlorophyll">
+          <svg class="ico" aria-hidden="true"><use href="#i-fish"/></svg>
+          <div class="layer-info">
+            <h4>Chlorophyll</h4>
+            <p>Plankton & algae concentration</p>
+          </div>
+        </button>
+        <button class="layer-btn" data-layer="wind">
+          <svg class="ico" aria-hidden="true"><use href="#i-weather"/></svg>
+          <div class="layer-info">
+            <h4>Wind</h4>
+            <p>Live forecasts & gusts</p>
+          </div>
+        </button>
+        <button class="layer-btn" data-layer="salinity">
+          <svg class="ico" aria-hidden="true"><use href="#i-gauge"/></svg>
+          <div class="layer-info">
+            <h4>Salinity</h4>
+            <p>Salt concentration levels</p>
+          </div>
+        </button>
+        <button class="layer-btn" data-layer="currents">
+          <svg class="ico" aria-hidden="true"><use href="#i-route"/></svg>
+          <div class="layer-info">
+            <h4>Currents</h4>
+            <p>Speed & direction</p>
+          </div>
+        </button>
+        <button class="layer-btn" data-layer="fsle">
+          <svg class="ico" aria-hidden="true"><use href="#i-radar"/></svg>
+          <div class="layer-info">
+            <h4>FSLE</h4>
+            <p>Locate eddies & boundaries</p>
+          </div>
+        </button>
+      </div>
+      
+      <div class="layer-map-terminal" data-active-layer="sst">
+        <!-- Base Map -->
+        <div class="layer-map-base"></div>
+        <!-- Overlays -->
+        <div class="layer-overlay lo-sst"></div>
+        <div class="layer-overlay lo-chlorophyll"></div>
+        <div class="layer-overlay lo-wind"></div>
+        <div class="layer-overlay lo-salinity"></div>
+        <div class="layer-overlay lo-currents"></div>
+        <div class="layer-overlay lo-fsle"></div>
+      </div>
+    </div>
+    
+    <div class="premium-callout reveal">
+      <svg class="ico" aria-hidden="true"><use href="#i-spark"/></svg>
+      <p>Premium marine layers that typically require multiple subscriptions—<strong>available together in VectorMarine as free.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ============ TRIP LOGGING TIMELINE ============ -->
+<section class="section how" id="trip-logging">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Automatic Trip Logging</span>
+      <h2 class="reveal">Every Trip.<br><span class="ink-soft">Automatically Remembered.</span></h2>
+    </div>
+    <div class="s-curve-container" id="s-curve-container">
+      <svg class="s-curve-svg" viewBox="0 0 1200 1300" preserveAspectRatio="none" aria-hidden="true">
+        <path class="s-route-bg" d="M 52 50 C 52 150, 852 150, 852 250 C 852 350, 52 350, 52 450 C 52 550, 852 550, 852 650 C 852 750, 52 750, 52 850 C 52 950, 852 950, 852 1050 C 852 1150, 52 1150, 52 1250" />
+        <path class="s-route-fg" id="s-route-path" d="M 52 50 C 52 150, 852 150, 852 250 C 852 350, 52 350, 52 450 C 52 550, 852 550, 852 650 C 852 750, 52 750, 52 850 C 52 950, 852 950, 852 1050 C 852 1150, 52 1150, 52 1250" />
+      </svg>
+      
+      <div class="s-curve-vessel" id="s-vessel">
+        <img src="assets/vessel.svg" alt="Vessel Tracker" style="width: 100%; height: 100%;" />
+      </div>
+
+      <ol class="s-curve-steps">
+        <li class="s-step pos-1 reveal">
+          <span class="s-node glass-node"></span>
+          <div class="timeline-card glass-panel">
+            <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-vessel"/></svg></div>
+            <div class="card-content"><h3>You Leave the Dock</h3><p>The moment you untie, we notice.</p></div>
+          </div>
+        </li>
+        <li class="s-step pos-2 reveal">
+          <span class="s-node glass-node record"></span>
+          <div class="timeline-card glass-panel">
+            <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-play"/></svg></div>
+            <div class="card-content"><h3>Your Trip Begins</h3><p>VectorMarine starts tracking your journey silently.</p></div>
+          </div>
+        </li>
+        <li class="s-step pos-3 reveal">
+          <span class="s-node glass-node"></span>
+          <div class="timeline-card glass-panel">
+            <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-route"/></svg></div>
+            <div class="card-content"><h3>Navigating the Route</h3><p>You just drive. We plot the course and speed.</p></div>
+          </div>
+        </li>
+        <li class="s-step pos-4 reveal">
+          <span class="s-node glass-node"></span>
+          <div class="timeline-card glass-panel">
+            <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-fish"/></svg></div>
+            <div class="card-content"><h3>You Log a Catch</h3><p>A quick tap saves the exact spot and conditions.</p></div>
+          </div>
+        </li>
+        <li class="s-step pos-5 reveal">
+          <span class="s-node glass-node"></span>
+          <div class="timeline-card glass-panel">
+            <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-pin"/></svg></div>
+            <div class="card-content"><h3>Personal Waypoints</h3><p>Found a good reef? Mark it for next time.</p></div>
+          </div>
+        </li>
+        <li class="s-step pos-6 reveal">
+          <span class="s-node glass-node"></span>
+          <div class="timeline-card glass-panel">
+            <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-vessel"/></svg></div>
+            <div class="card-content"><h3>You Return Home</h3><p>Once you're back at the dock, tracking stops.</p></div>
+          </div>
+        </li>
+        <li class="s-step pos-7 reveal">
+          <span class="s-node glass-node success"></span>
+          <div class="timeline-card glass-panel">
+            <div class="card-icon"><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg></div>
+            <div class="card-content"><h3>Captain's Log Complete</h3><p>Your entire trip is synced and ready to review.</p></div>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </div>
+</section>
+
 <!-- ============ COMMUNITY ============ -->
 <section class="section community" id="community">
   <div class="container">
     <div class="section-head">
       <span class="eyebrow reveal"><span class="eyebrow-dot"></span>The Community</span>
-      <h2 class="reveal">If you leave the dock,<br><span class="ink-soft">you're part of the crew.</span></h2>
-      <p class="section-sub reveal">Add dockmates to build your circle, spin up or join a fleet to share every journey, and stay connected with messaging across the whole crew — all from one connected app.</p>
+      <h2 class="reveal">Built for<br><span class="ink-soft">Every Captain.</span></h2>
+      <p class="section-sub reveal">Add captains to build your circle, spin up or join a fleet to share every journey, and stay connected with messaging across the community — all from one connected app.</p>
     </div>
 
     <div class="app-showcase">
 
-      <!-- 1 · DOCKMATES — build your circle -->
+      <!-- 1 · CAPTAINS — build your circle -->
       <article class="app-feature reveal">
         <div class="app-frame">
           <span class="app-glow" aria-hidden="true"></span>
           <!-- 
-          <div class="app-screen" role="img" aria-label="Dockmates screen: a list of connected captains and friends with the option to add more.">
+          <div class="app-screen" role="img" aria-label="Captains screen: a list of connected captains and friends with the option to add more.">
             <div class="app-bar">
-              <span class="app-bar-title">Dockmates</span>
+              <span class="app-bar-title">Captains</span>
               <span class="app-chip">24 connected</span>
             </div>
             <div class="app-search"><svg class="ico" aria-hidden="true"><use href="#i-users"/></svg><span>Find captains &amp; friends</span></div>
@@ -330,14 +527,14 @@
                 <span class="dm-state add"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg></span>
               </li>
             </ul>
-            <button type="button" class="app-cta"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Add a dockmate</button>
+            <button type="button" class="app-cta"><svg class="ico" aria-hidden="true"><use href="#i-plus"/></svg>Add a captain</button>
           </div>
           -->
-          <img src="assets/1-light.png" class="app-screen-img light-only" alt="Dockmates screen">
-          <img src="assets/1-dark.png" class="app-screen-img dark-only" alt="Dockmates screen">
+          <img src="assets/1-light.png" class="app-screen-img light-only" alt="Captains screen">
+          <img src="assets/1-dark.png" class="app-screen-img dark-only" alt="Captains screen">
         </div>
         <div class="app-caption">
-          <span class="app-tag">Dockmates</span>
+          <span class="app-tag">Captains</span>
           <h3>Build your circle</h3>
           <p>Add the captains and friends you ride with, and keep your whole dock one tap away.</p>
         </div>
@@ -410,13 +607,13 @@
         <div class="app-caption">
           <span class="app-tag">Messaging</span>
           <h3>Stay connected</h3>
-          <p>Message any dockmate or your whole fleet, drop a live location, and keep the crew together from dock to horizon.</p>
+          <p>Message any captain or your whole fleet, drop a live location, and keep the crew together from dock to horizon.</p>
         </div>
       </article>
 
     </div>
 
-    <p class="community-foot reveal">If your hull is in the water,<br><span class="ink-soft">you belong here.</span></p>
+
   </div>
 </section>
 
@@ -424,7 +621,7 @@
 <section class="section vessel" id="vessel">
   <div class="container grid-2">
     <div class="vessel-copy">
-      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>The Hardware</span>
+      <span class="eyebrow reveal"><span class="eyebrow-dot"></span>The Hardware (optional)</span>
       <h2 class="reveal">Your vessel. <span class="ink-soft">Connected.</span></h2>
       <p class="lede reveal">
         The VectorMarine DataBridge connects directly to your vessel and continuously streams
@@ -525,12 +722,12 @@
     <div class="timeline" id="timeline">
       <div class="timeline-line"><span class="timeline-progress" id="tlProgress"></span></div>
       <ol>
-        <li class="step reveal"><span class="step-node">01</span><div class="step-body"><h3>Install DataBridge</h3><p>Mount the VectorMarine DataBridge on your vessel.</p></div></li>
-        <li class="step reveal"><span class="step-node">02</span><div class="step-body"><h3>Connect to VectorMarine</h3><p>Pair your vessel once.</p></div></li>
-        <li class="step reveal"><span class="step-node">03</span><div class="step-body"><h3>Go anywhere</h3><p>Trips automatically begin recording.</p></div></li>
-        <li class="step reveal"><span class="step-node">04</span><div class="step-body"><h3>Capture intelligence</h3><p>Create waypoints and observations.</p></div></li>
-        <li class="step reveal"><span class="step-node">05</span><div class="step-body"><h3>Collaborate</h3><p>Invite crew members, borrow vessels, or ride along.</p></div></li>
-        <li class="step reveal"><span class="step-node">06</span><div class="step-body"><h3>Build marine intelligence</h3><p>Every trip becomes future insight.</p></div></li>
+        <li class="step reveal"><span class="step-node">01</span><div class="step-body"><h3>Rig your vessel (optional)</h3><p>Mount the VectorMarine DataBridge and bring your boat online in minutes.</p></div></li>
+        <li class="step reveal"><span class="step-node">02</span><div class="step-body"><h3>Download the app</h3><p>Get the VectorMarine app on your device, and you're ready for the water.</p></div></li>
+        <li class="step reveal"><span class="step-node">03</span><div class="step-body"><h3>Untie and go</h3><p>Just focus on driving. We automatically log your route, speed, and weather conditions.</p></div></li>
+        <li class="step reveal"><span class="step-node">04</span><div class="step-body"><h3>Mark your spots</h3><p>Drop a waypoint exactly where you found that perfect reef or landed a big catch.</p></div></li>
+        <li class="step reveal"><span class="step-node">05</span><div class="step-body"><h3>Bring the crew</h3><p>Invite friends to ride along, share your live location, or securely lend out your boat.</p></div></li>
+        <li class="step reveal"><span class="step-node">06</span><div class="step-body"><h3>Build your log</h3><p>Turn every journey into a detailed history so you can plan your next trip with confidence.</p></div></li>
       </ol>
     </div>
   </div>
@@ -543,16 +740,16 @@
   <div class="container grid-2">
     <div class="borrow-copy">
       <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Borrow Vessels</span>
-      <h2 class="reveal">Ownership stays. <span class="ink-soft">Access moves.</span></h2>
-      <p class="lede reveal">Borrow vessels securely while preserving ownership. Owners retain full control.</p>
-      <p class="muted reveal">Borrowers gain temporary access to:</p>
+      <h2 class="reveal">Lend your boat. <span class="ink-soft">Keep your peace of mind.</span></h2>
+      <p class="lede reveal">Letting a buddy take your boat out for the weekend shouldn't mean losing track of what happens on the water.</p>
+      <p class="muted reveal">When you share access, your friend gets everything they need for a safe trip:</p>
       <ul class="check-list reveal">
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>DataBridge</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Trips</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Waypoints</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Vessel operation data</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Live DataBridge telemetry</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Your saved routes &amp; waypoints</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Real-time engine stats</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Marine weather overlays</li>
       </ul>
-      <p class="muted reveal">The owner can revoke access at any time. All activity remains clearly attributed.</p>
+      <p class="muted reveal">You stay in the loop, and they get to enjoy the water. You can revoke access the second they're back at the dock.</p>
     </div>
 
     <div class="borrow-visual reveal" data-parallax="0.08">
@@ -634,16 +831,16 @@
     </div>
     <div class="ride-copy">
       <span class="eyebrow reveal"><span class="eyebrow-dot"></span>Ride Along</span>
-      <h2 class="reveal">Shared trips.<br><span class="ink-soft">One source of truth.</span></h2>
-      <p class="lede reveal">Invite friends and crew members onto active trips.</p>
-      <p class="muted reveal">Participants can:</p>
+      <h2 class="reveal">Everyone on board.<br><span class="ink-soft">One shared log.</span></h2>
+      <p class="lede reveal">No more texting waypoints or piecing together photos after the trip. Bring your friends into your active trip right in the app.</p>
+      <p class="muted reveal">Everyone in the crew can actively pitch in:</p>
       <ul class="check-list reveal">
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>View trip progress</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Add waypoints</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Contribute observations</li>
-        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Edit trip details</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>See the live route progress</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Drop pins for catches &amp; spots</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Add their own photos &amp; notes</li>
+        <li><svg class="ico" aria-hidden="true"><use href="#i-check"/></svg>Help navigate the journey</li>
       </ul>
-      <p class="muted reveal">Only the trip owner can delete the trip.</p>
+      <p class="muted reveal">When the day is done, the entire crew walks away with the exact same rich trip history.</p>
     </div>
   </div>
 </section>
@@ -738,7 +935,7 @@
       <!-- Card 3 -->
       <article class="price-card reveal">
         <h3 class="price-name">Premium + Data Bridge</h3>
-        <div class="price-amt" style="font-size:1.8rem">Data Bridge<span class="price-cycle">Hardware Integration</span></div>
+        <div class="price-amt">$599<span class="price-cycle">Month</span></div>
         <p class="price-for">Transform your vessel into a fully connected experience.</p>
         
         <div class="price-section-title">Everything in Premium, Plus</div>
@@ -814,12 +1011,17 @@
       <h2 class="reveal">Questions, answered.</h2>
     </div>
     <div class="faq-list">
-      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What is VectorMarine?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>VectorMarine is a connected vessel intelligence platform powered by <img src="assets/EsperWave.svg" class="esper-logo" alt="EsperWave" style="height: 2.2em; vertical-align: middle; display: inline-block; transform: translateY(-2px);">.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What is VectorMarine?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Automatically record every trip, remember every fishing spot, capture every catch, and explore the water with powerful marine intelligence—all from one app.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Do I need a DataBridge?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. The DataBridge enables live telemetry and vessel communication.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Can I share my vessel?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. Vessel owners can temporarily lend access while maintaining ownership.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What happens when a vessel is borrowed?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Ownership remains unchanged while operational access is temporarily transferred.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Can multiple people join a trip?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. Ride Along enables collaborative trip participation.</p></div></div>
       <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Does VectorMarine work offshore?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. Connectivity depends on installed hardware and available communication systems.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Do I need Starlink?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>No. While satellite internet enables live syncing far offshore, the core app works using your device's built-in GPS.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Does it work offline?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. It uses local cache to store your activities and automatically restores and syncs data once you are back online.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Can I log trips without internet?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. Trips and waypoints are logged locally and automatically sync to your account once you regain connectivity.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">What requires the DataBridge?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>The DataBridge is required for live vessel telemetry, engine data, remote monitoring, and sharing live stats with your crew.</p></div></div>
+      <div class="faq-item reveal"><button class="faq-q" aria-expanded="false">Can I borrow someone else's vessel?<span class="faq-ico" aria-hidden="true"></span></button><div class="faq-a"><p>Yes. VectorMarine's borrowing feature lets owners securely grant temporary access to their vessel's DataBridge and history.</p></div></div>
     </div>
   </div>
 </section>
@@ -849,10 +1051,9 @@
           <p class="lede">Whether you're an individual captain or managing an entire fleet, we'd love to hear from you.</p>
         </div>
         <div class="contact-details">
-          <a class="contact-row" href="mailto:hello@vectormarine.com"><span class="cr-k">Email</span><span class="cr-v">hello@vectormarine.com</span></a>
-          <div class="contact-row"><span class="cr-k">Phone</span><span class="cr-v">+1 XXX XXX XXXX</span></div>
+          <a class="contact-row" href="mailto:support@esperwave.com"><span class="cr-k">Email</span><span class="cr-v">support@esperwave.com</span></a>
           <div class="contact-row"><span class="cr-k">Location</span><span class="cr-v">United States</span></div>
-          <a class="btn btn-soft full" href="mailto:hello@vectormarine.com">Contact Us</a>
+          <a class="btn btn-soft full" href="mailto:support@esperwave.com">Contact Us</a>
         </div>
       </div>
     </div>
