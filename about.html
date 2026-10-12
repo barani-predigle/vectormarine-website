@@ -31,6 +31,34 @@
   <!-- ============ SVG ICON SPRITE (no emoji icons) ============ -->
   <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
     <defs>
+      <symbol id="i-boat-live" viewBox="0 0 24 24">
+        <path d="M4 16h16l-2.5 4h-11L4 16Z" />
+        <path d="M12 16v-4" />
+        <circle cx="12" cy="11" r="1.2" fill="currentColor" stroke="none" />
+        <path d="M9.2 8.2a4 4 0 0 1 5.6 0" />
+        <path d="M6.6 5.6a7.6 7.6 0 0 1 10.8 0" />
+      </symbol>
+      <symbol id="i-relief" viewBox="0 0 24 24">
+        <path d="M2.5 19l6-9 4 5.5 2.5-3.5 6.5 7H2.5Z" />
+        <path d="M8.5 10l1.6 5.5M15 12l-.8 3.5" />
+      </symbol>
+      <symbol id="i-layers" viewBox="0 0 24 24">
+        <path d="M12 3l9 4.5-9 4.5-9-4.5L12 3Z" />
+        <path d="M3 12l9 4.5 9-4.5" />
+        <path d="M3 16.5l9 4.5 9-4.5" />
+      </symbol>
+      <symbol id="i-track-live" viewBox="0 0 24 24">
+        <circle cx="4.5" cy="19" r="1.5" />
+        <path d="M6 18.2c3-1.4 2.6-5.2 6-5.2s3.4-4 5-5" stroke-dasharray="2 2.2" />
+        <circle cx="18.5" cy="7" r="1.6" fill="currentColor" stroke="none" />
+        <circle cx="18.5" cy="7" r="3.6" />
+      </symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24">
+        <rect x="5" y="11" width="14" height="10" rx="2" />
+        <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+        <circle cx="12" cy="15.5" r="1.3" />
+        <path d="M12 16.8v1.7" />
+      </symbol>
       <symbol id="i-radar" viewBox="0 0 24 24">
         <circle cx="12" cy="12" r="9" />
         <circle cx="12" cy="12" r="5" />
@@ -555,13 +583,48 @@
             style="height: 24px; display: block;"></span>
       </a>
       <nav class="nav-links" id="navLinks" aria-label="Primary">
-        <a href="index.html#community">Community</a>
-        <a href="index.html#vessel">Platform</a>
-        <a href="index.html#capabilities">Features</a>
-        <a href="index.html#collaboration">Collaboration</a>
-        <a href="about.html">About</a>
+        <div class="nav-dd">
+          <button class="nav-dd-btn" type="button" aria-expanded="false" aria-controls="navFeatures">Features<svg
+              class="nav-dd-chev" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M6 9l6 6 6-6" />
+            </svg></button>
+          <div class="nav-dd-menu" id="navFeatures">
+            <a class="nav-dd-item" href="index.html#why">
+              <span class="nav-dd-ico"><svg class="ico" aria-hidden="true">
+                  <use href="#i-boat-live" />
+                </svg></span>
+              <span class="nav-dd-txt"><strong>The fleet</strong><small>Boats you fish with, live</small></span>
+            </a>
+            <a class="nav-dd-item" href="index.html#charts">
+              <span class="nav-dd-ico"><svg class="ico" aria-hidden="true">
+                  <use href="#i-relief" />
+                </svg></span>
+              <span class="nav-dd-txt"><strong>Charts</strong><small>Shaded-relief bathymetry</small></span>
+            </a>
+            <a class="nav-dd-item" href="index.html#ocean-layers">
+              <span class="nav-dd-ico"><svg class="ico" aria-hidden="true">
+                  <use href="#i-layers" />
+                </svg></span>
+              <span class="nav-dd-txt"><strong>Ocean layers</strong><small>SST, currents, radar & more</small></span>
+            </a>
+            <a class="nav-dd-item" href="index.html#trip-log">
+              <span class="nav-dd-ico"><svg class="ico" aria-hidden="true">
+                  <use href="#i-track-live" />
+                </svg></span>
+              <span class="nav-dd-txt"><strong>Trip log</strong><small>Tracks and catches, logged</small></span>
+            </a>
+            <a class="nav-dd-item" href="index.html#sharing">
+              <span class="nav-dd-ico"><svg class="ico" aria-hidden="true">
+                  <use href="#i-lock" />
+                </svg></span>
+              <span class="nav-dd-txt"><strong>Sharing</strong><small>You choose who sees what</small></span>
+            </a>
+          </div>
+        </div>
+        <a href="index.html#clubs">Clubs</a>
+        <a href="index.html#vessel">DataBridge</a>
         <a href="index.html#pricing">Pricing</a>
-        <a class="btn btn-primary nav-cta" href="index.html#contact">Get Started</a>
+        <a class="btn btn-primary nav-cta" href="index.html#download">Get the app</a>
         <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode"
           style="background: none; border: none; cursor: pointer; color: var(--muted); display: flex; align-items: center; padding: 4px; margin-left: 10px;">
           <svg class="ico" id="themeIcon" aria-hidden="true" style="width: 20px; height: 20px;">

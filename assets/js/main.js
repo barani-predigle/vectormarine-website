@@ -38,6 +38,21 @@
   navLinks.querySelectorAll('a').forEach((a) => a.addEventListener('click', closeMenu));
   document.addEventListener('keydown', (e) => e.key === 'Escape' && closeMenu());
 
+  // Features dropdown: hover on desktop, click/keyboard everywhere
+  document.querySelectorAll('.nav-dd').forEach((dd) => {
+    const btn = dd.querySelector('.nav-dd-btn');
+    const set = (open) => { dd.classList.toggle('open', open); btn.setAttribute('aria-expanded', String(open)); };
+    const desktop = () => window.matchMedia('(min-width: 981px) and (hover: hover)').matches;
+    let t;
+    dd.addEventListener('mouseenter', () => { if (desktop()) { clearTimeout(t); set(true); } });
+    dd.addEventListener('mouseleave', () => { if (desktop()) t = setTimeout(() => set(false), 120); });
+    btn.addEventListener('click', () => set(!dd.classList.contains('open')));
+    dd.addEventListener('focusout', (e) => { if (!dd.contains(e.relatedTarget)) set(false); });
+    dd.addEventListener('keydown', (e) => { if (e.key === 'Escape') { set(false); btn.focus(); } });
+    document.addEventListener('click', (e) => { if (!dd.contains(e.target)) set(false); });
+    dd.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => set(false)));
+  });
+
   /* -------------------------------------------------
      REVEAL on scroll + stagger
   ------------------------------------------------- */
@@ -634,5 +649,255 @@
         }
       });
     });
+  }
+
+  /* -------------------------------------------------
+     MEET SKIPPER — demo chat agent
+  ------------------------------------------------- */
+  const skPanel = document.querySelector('.skipper-panel');
+  const skThread = skPanel && skPanel.querySelector('.sk-thread');
+  if (skPanel && skThread) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const chips = skPanel.querySelectorAll('.sk-chip');
+    const dancer = skPanel.querySelector('.sk-dancer');
+    const avatar = 'assets/layers/skipper-front.svg';
+    const replies = {
+      'Help me find a temp break on SST': 'Open the layers and switch on SST. Where the colors change fast over a short distance, that\'s a temperature break, and that\'s where bait and pelagics stack up.',
+      'Start my first trip': 'Tap Throw Lines when you leave the inlet. I\'ll log your track, your speed and every catch while you fish. Pause or stop any time.',
+      'Drop and share my waypoint': 'Tap Waypoint, pick what you found and save it. It stays Only me until you choose who sees it: your Pier Circle, one fleet, or just the boats you check.',
+      'Add my Dockmates': 'Head to the Network tab and add the boats you fish with as Dockmates. When they share with you, they show up live on your chart.',
+      "Join my club's fleet": 'Ask your club for an invite to its closed fleet. Once you\'re in, pick it on the Network tab and its logo takes the place of the globe.'
+    };
+    let busy = false;
+    let pending = null;
+
+    const time = () => new Date().toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' });
+    const scrollDown = () => { skThread.scrollTop = skThread.scrollHeight; };
+    const row = (who) => {
+      const r = document.createElement('div');
+      r.className = 'sk-row sk-row-' + who;
+      if (who === 'bot') {
+        const img = document.createElement('img');
+        img.className = 'sk-ava'; img.src = avatar; img.alt = ''; img.width = 28; img.height = 28;
+        r.appendChild(img);
+      }
+      const wrap = document.createElement('div');
+      r.appendChild(wrap);
+      skThread.appendChild(r);
+      return wrap;
+    };
+    const say = (who, text, meta) => {
+      const wrap = row(who);
+      const m = document.createElement('div');
+      m.className = 'sk-msg sk-' + who;
+      m.textContent = text;
+      const t = document.createElement('span');
+      t.className = 'sk-meta';
+      t.textContent = meta;
+      wrap.append(m, t);
+      scrollDown();
+    };
+    const hop = () => {
+      if (!dancer || reduce) return;
+      dancer.classList.remove('is-hop');
+      void dancer.offsetWidth;
+      dancer.classList.add('is-hop');
+      setTimeout(() => dancer.classList.remove('is-hop'), 650);
+    };
+    const botReply = (text, done) => {
+      const wrap = row('bot');
+      const typing = document.createElement('div');
+      typing.className = 'sk-msg sk-bot sk-typing';
+      typing.setAttribute('aria-label', 'Skipper is typing');
+      typing.innerHTML = '<i></i><i></i><i></i>';
+      wrap.appendChild(typing);
+      scrollDown();
+      const delay = reduce ? 0 : Math.min(1800, 600 + text.length * 8);
+      const finish = () => {
+        clearTimeout(timer);
+        pending = null;
+        wrap.parentElement.remove();
+        say('bot', text, 'Skipper · ' + time());
+        hop();
+        if (done) done();
+      };
+      const timer = setTimeout(finish, delay);
+      pending = finish;
+    };
+    const ask = (text) => {
+      text = text.trim();
+      if (!replies[text]) return;
+      if (pending) pending();
+      if (busy) return;
+      busy = true;
+      chips.forEach(c => c.classList.toggle('is-active', c.textContent === text));
+      say('user', text, 'You · ' + time());
+      botReply(replies[text], () => { busy = false; });
+    };
+
+    chips.forEach(chip => chip.addEventListener('click', () => ask(chip.textContent)));
+
+    // Suggestions: horizontal scroller with arrows, wheel and drag support.
+    const rail = skPanel.querySelector('.sk-chips');
+    const navBtns = skPanel.querySelectorAll('.sk-nav-btn');
+    if (rail) {
+      const update = () => {
+        const max = rail.scrollWidth - rail.clientWidth;
+        const left = rail.scrollLeft > 2;
+        const right = rail.scrollLeft < max - 2;
+        rail.classList.toggle('can-left', left);
+        rail.classList.toggle('can-right', right);
+        navBtns.forEach(b => { b.disabled = b.dataset.dir === '-1' ? !left : !right; });
+      };
+      navBtns.forEach(b => b.addEventListener('click', () => {
+        rail.scrollBy({ left: Number(b.dataset.dir) * rail.clientWidth * 0.7, behavior: reduce ? 'auto' : 'smooth' });
+      }));
+      rail.addEventListener('scroll', update, { passive: true });
+      window.addEventListener('resize', update);
+      update();
+
+      // Vertical mouse wheel scrolls the row sideways, but hands back to the page at either end.
+      rail.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+        const max = rail.scrollWidth - rail.clientWidth;
+        if ((e.deltaY < 0 && rail.scrollLeft <= 0) || (e.deltaY > 0 && rail.scrollLeft >= max - 1)) return;
+        e.preventDefault();
+        rail.scrollLeft += e.deltaY;
+      }, { passive: false });
+
+      // Click-and-drag with a mouse; touch keeps native swiping.
+      let startX = 0, startLeft = 0, dragging = false, moved = false;
+      rail.addEventListener('pointerdown', (e) => {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        dragging = true; moved = false;
+        startX = e.clientX; startLeft = rail.scrollLeft;
+      });
+      window.addEventListener('pointermove', (e) => {
+        if (!dragging) return;
+        const dx = e.clientX - startX;
+        if (!moved && Math.abs(dx) > 5) { moved = true; rail.classList.add('is-dragging'); }
+        if (moved) rail.scrollLeft = startLeft - dx;
+      });
+      window.addEventListener('pointerup', () => {
+        if (!dragging) return;
+        dragging = false;
+        setTimeout(() => rail.classList.remove('is-dragging'), 0);
+      });
+    }
+
+    // Greet with a typing indicator the first time the chat scrolls into view.
+    if ('IntersectionObserver' in window && !reduce) {
+      const greeting = skThread.querySelector('.sk-row-bot');
+      if (greeting) {
+        const text = greeting.querySelector('.sk-msg').textContent;
+        greeting.remove();
+        const io = new IntersectionObserver((entries) => {
+          if (!entries.some(en => en.isIntersecting)) return;
+          io.disconnect();
+          busy = true;
+          botReply(text, () => { busy = false; });
+        }, { threshold: 0.4 });
+        io.observe(skPanel);
+      }
+    }
+  }
+
+  /* -------------------------------------------------
+     CAPTAIN QUOTES — auto-playing carousel
+  ------------------------------------------------- */
+  const tq = document.querySelector('.tq-carousel');
+  const tqTrack = tq && tq.querySelector('.tq-track');
+  if (tq && tqTrack) {
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const INTERVAL = 5000;
+    const cards = [...tqTrack.querySelectorAll('.tq-card')];
+    const dotsWrap = tq.querySelector('.tq-dots');
+    const btns = document.querySelectorAll('.tq-btn');
+    tq.style.setProperty('--tq-interval', INTERVAL + 'ms');
+    let stops = [], dots = [], current = -1, timer = null;
+    let hovering = false, focused = false, inView = false, touched = false;
+
+    const maxScroll = () => tqTrack.scrollWidth - tqTrack.clientWidth;
+    const buildStops = () => {
+      const max = maxScroll();
+      const base = cards[0].offsetLeft;
+      stops = [];
+      cards.forEach(c => {
+        const x = Math.min(c.offsetLeft - base, max);
+        if (!stops.length || x - stops[stops.length - 1] > 4) stops.push(x);
+      });
+      dotsWrap.innerHTML = '';
+      dots = stops.map((_, i) => {
+        const d = document.createElement('button');
+        d.type = 'button';
+        d.className = 'tq-dot';
+        d.setAttribute('role', 'tab');
+        d.setAttribute('aria-label', 'Go to quote ' + (i + 1));
+        d.addEventListener('click', () => { go(i); restart(); });
+        dotsWrap.appendChild(d);
+        return d;
+      });
+      current = -1;
+      sync();
+    };
+    const nearest = () => {
+      const x = tqTrack.scrollLeft;
+      let best = 0;
+      stops.forEach((s, i) => { if (Math.abs(s - x) < Math.abs(stops[best] - x)) best = i; });
+      return best;
+    };
+    const sync = () => {
+      const i = nearest();
+      if (i === current) return;
+      current = i;
+      dots.forEach((d, k) => {
+        const on = k === i;
+        d.classList.remove('is-active');
+        d.setAttribute('aria-selected', on ? 'true' : 'false');
+        if (on) { void d.offsetWidth; d.classList.add('is-active'); }
+      });
+      cards.forEach(c => {
+        const visible = c.offsetLeft - cards[0].offsetLeft >= stops[i] - 4 &&
+          c.offsetLeft - cards[0].offsetLeft + c.offsetWidth <= stops[i] + tqTrack.clientWidth + 4;
+        c.classList.toggle('is-current', visible);
+      });
+    };
+    const go = (i) => {
+      const n = stops.length;
+      const target = ((i % n) + n) % n;
+      tqTrack.scrollTo({ left: stops[target], behavior: reduce ? 'auto' : 'smooth' });
+    };
+    const canPlay = () => !reduce && inView && !hovering && !focused && !touched && !document.hidden;
+    const stop = () => { clearInterval(timer); timer = null; tq.classList.remove('is-playing'); };
+    const play = () => {
+      stop();
+      if (!canPlay()) return;
+      tq.classList.add('is-playing');
+      const d = dots[current];
+      if (d) { d.classList.remove('is-active'); void d.offsetWidth; d.classList.add('is-active'); }
+      timer = setInterval(() => go(current + 1), INTERVAL);
+    };
+    const restart = () => { if (timer || canPlay()) play(); };
+
+    btns.forEach(b => b.addEventListener('click', () => { go(current + Number(b.dataset.dir)); restart(); }));
+    let scrollT;
+    tqTrack.addEventListener('scroll', () => {
+      clearTimeout(scrollT);
+      scrollT = setTimeout(() => { const was = current; sync(); if (current !== was && timer) play(); }, 80);
+    }, { passive: true });
+    tq.addEventListener('mouseenter', () => { hovering = true; stop(); });
+    tq.addEventListener('mouseleave', () => { hovering = false; play(); });
+    tq.addEventListener('focusin', () => { focused = true; stop(); });
+    tq.addEventListener('focusout', (e) => { if (!tq.contains(e.relatedTarget)) { focused = false; play(); } });
+    tqTrack.addEventListener('touchstart', () => { touched = true; stop(); }, { passive: true });
+    tqTrack.addEventListener('touchend', () => { setTimeout(() => { touched = false; play(); }, 4000); }, { passive: true });
+    document.addEventListener('visibilitychange', () => (document.hidden ? stop() : play()));
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver((en) => { inView = en.some(e => e.isIntersecting); inView ? play() : stop(); }, { threshold: 0.35 }).observe(tq);
+    } else { inView = true; }
+    let resizeT;
+    window.addEventListener('resize', () => { clearTimeout(resizeT); resizeT = setTimeout(() => { buildStops(); play(); }, 150); });
+    buildStops();
+    play();
   }
 })();
