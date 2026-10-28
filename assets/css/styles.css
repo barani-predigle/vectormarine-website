@@ -408,23 +408,26 @@ p{font-weight:500;}
 .hero-meta strong{font-family:var(--display);font-size:1.9rem;font-weight:700;color:var(--ink);line-height:1;letter-spacing:-.02em}
 .hero-meta span{font-size:.82rem;color:var(--muted);margin-top:6px;font-family:var(--mono);letter-spacing:.04em}
 
-/* ---------- FLEET (svg boats + routes) ---------- */
+/* ---------- FLEET (svg boats + routes + realistic waypoint markers) ---------- */
 .route{fill:none;stroke:url(#routeGrad);stroke-width:2;stroke-linecap:round;opacity:.55;
   transition:opacity .4s var(--ease),stroke-width .4s var(--ease)}
 .route-flow{fill:none;stroke:var(--cyan);stroke-width:2.4;stroke-linecap:round;
   stroke-dasharray:3 18;opacity:0;transition:opacity .4s var(--ease)}
-.wpt{fill:var(--accent-400)}
-.wpt-ring{fill:none;stroke:var(--accent-400);transform-origin:center;transform-box:fill-box}
 .boat-hit{fill:transparent;cursor:pointer}
-.boat-glow{fill:url(#boatPing);opacity:.0;transition:opacity .4s var(--ease)}
-.boat-body{fill:#EAF4FF;stroke:var(--accent-600);stroke-width:.8;
-  filter:drop-shadow(0 0 6px rgba(47,125,255,.85))}
+.boat-glow{fill:url(#boatPing);opacity:0;transition:opacity .4s var(--ease)}
 .boat-body-detailed{
-  filter:drop-shadow(0 0 6px rgba(47,125,255,.85))}
+  filter:drop-shadow(0 0 6px rgba(47,125,255,.85));
+  transition:transform .2s var(--ease)}
 .boat-reticle{fill:none;stroke:var(--crosshair, var(--cyan));stroke-width:1.2;opacity:0;transform-origin:center;transform-box:fill-box;
   transition:opacity .3s var(--ease)}
 .boat-tag{font-family:var(--mono);font-size:10px;letter-spacing:.08em;fill:var(--accent-200);opacity:.55;
   transition:opacity .35s,fill .35s;paint-order:stroke;stroke:rgba(5,7,14,.85);stroke-width:3px}
+
+/* Realistic Waypoint Markers inspired by Vector Marine App */
+.chart-wpt{pointer-events:none;transition:opacity .25s var(--ease)}
+.chart-wpt-img{pointer-events:none}
+
+/* Node focus & hover */
 .fleet-node{outline:none}
 .fleet-node:focus-visible .boat-reticle,
 .fleet-node.sel .boat-reticle{opacity:1}
@@ -433,11 +436,22 @@ p{font-weight:500;}
 .fleet-node.sel .boat-tag{opacity:1;fill:#fff}
 .fleet-node:hover .boat-glow,
 .fleet-node.sel .boat-glow{opacity:1}
-/* dim non-selected routes when one is active */
-.fleet-layer.has-sel .route{opacity:.16}
-.fleet-layer.has-sel .route.on{opacity:.95;stroke-width:2.8}
-.fleet-layer.has-sel .route-flow.on{opacity:.9;animation:flow 1.1s linear infinite}
-@keyframes flow{to{stroke-dashoffset:-42}}
+
+/* Dim non-selected routes; illuminate active track line in vibrant blue */
+.fleet-layer.has-sel .route{opacity:.12;stroke-width:1.8}
+.fleet-layer.has-sel .route.on{
+  stroke:#0084FF !important;
+  stroke-width:3.6px !important;
+  opacity:1 !important;
+  filter:drop-shadow(0 0 9px rgba(0,132,255,.65));
+}
+.fleet-layer.has-sel .route-flow.on{
+  stroke:#FFFFFF;
+  stroke-width:2.2px;
+  opacity:.95;
+  animation:flow 1.2s linear infinite;
+}
+@keyframes flow{to{stroke-dashoffset:-40}}
 .fleet-node .boat-reticle{animation:reticle 14s linear infinite}
 @keyframes reticle{to{transform:rotate(360deg)}}
 

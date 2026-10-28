@@ -21,7 +21,10 @@
       "Bash(sed -n '64,70p' about.html)",
       "Bash(git checkout *)",
       "Bash(pkill -f \"node server.js\")",
-      "Bash(grep -nE \"rgba\\\\\\(\\([0-9]{1,2}|1[0-4][0-9]\\),|#0[0-9a-fA-F]{5}|#1[0-9a-dA-D]|background:\\(#|linear|rgba\\)|data-theme|seaDark|devBody|app-frame\" about.html)"
+      "Bash(grep -nE \"rgba\\\\\\(\\([0-9]{1,2}|1[0-4][0-9]\\),|#0[0-9a-fA-F]{5}|#1[0-9a-dA-D]|background:\\(#|linear|rgba\\)|data-theme|seaDark|devBody|app-frame\" about.html)",
+      "Read(//Users/baraniraja/Library/Application Support/Claude/local-agent-mode-sessions/skills-plugin/94c97573-7705-4cba-b8b2-98b16d9e1e9e/bb45eae2-4651-48d5-8540-d5249394904a/skills/design-inspiration/references/**)",
+      "Read(//mnt/skills/user/design-inspiration/**)",
+      "Bash(awk 'NR>55')"
     ]
   }
 }

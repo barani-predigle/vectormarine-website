@@ -249,48 +249,122 @@
   const seaCanvas = document.getElementById('sea');
   const fleetCard = document.getElementById('fleetCard');
 
-  // Fleet roster — each vessel: a route across the sea + live telemetry.
+  // Fleet roster — each vessel: a realistic route across the chart + live US customary telemetry.
   const FLEET = [
-    { id: 'VM-01', name: 'Aurora II',   cls: 'Offshore · 42ft',    d: 'M560 706 C 706 642 770 452 922 470 S 1182 354 1352 244', speed: 18.4, heading: 147, depth: 42.1, temp: 21.6, wpt: 'Reef Marker 7',     wpts: [[922, 470], [1182, 354]], spd: 0.045, ph: 0.10 },
-    { id: 'VM-02', name: 'Northwind',   cls: 'Charter · 58ft',     d: 'M624 238 C 786 300 824 470 982 502 S 1224 566 1366 472', speed: 12.7, heading: 212, depth: 67.4, temp: 19.8, wpt: 'Harbor Approach',   wpts: [[982, 502], [1224, 566]], spd: 0.034, ph: 0.55 },
-    { id: 'VM-03', name: 'Sea Lark',    cls: 'Recreational · 31ft', d: 'M512 824 C 700 806 884 762 1002 660 S 1190 520 1306 566', speed: 9.2,  heading: 84,  depth: 18.9, temp: 22.4, wpt: 'Cove Anchorage',    wpts: [[1002, 660], [1190, 520]], spd: 0.028, ph: 0.30 },
-    { id: 'VM-04', name: 'Mariner V',   cls: 'Commercial · 74ft',  d: 'M600 452 C 762 436 902 560 1042 540 S 1266 440 1384 352', speed: 14.6, heading: 178, depth: 88.2, temp: 20.1, wpt: 'Shipping Lane 3',   wpts: [[1042, 540], [1266, 440]], spd: 0.040, ph: 0.78 },
-    { id: 'VM-05', name: 'Tide Runner', cls: 'Fishing · 38ft',     d: 'M556 566 C 720 604 822 704 984 722 S 1244 702 1366 624', speed: 16.1, heading: 121, depth: 34.7, temp: 21.0, wpt: 'Fishing Ground B',  wpts: [[984, 722], [1244, 702]], spd: 0.050, ph: 0.42 },
+    {
+      id: 'VM-01',
+      name: 'Aurora II',
+      cls: 'Offshore · 42ft',
+      d: 'M560 706 C 706 642 770 452 922 470 S 1182 354 1352 244',
+      speed: 18.4,
+      heading: 147,
+      depth: 138,
+      temp: 71.2,
+      wpt: 'Reef Marker 7 (64 ft)',
+      wpts: [
+        { label: 'Yellowfin Strike · 138 ft', x: 922,  y: 470, markerColor: 'blue' },
+        { label: 'Cote Reef · 45 ft',         x: 1182, y: 354, markerColor: 'green' },
+        { label: 'Reef Marker 7 (64 ft)',     x: 1352, y: 244, markerColor: 'red' }
+      ],
+      spd: 0.045,
+      ph: 0.10
+    },
+    {
+      id: 'VM-02',
+      name: 'Northwind',
+      cls: 'Charter · 58ft',
+      d: 'M624 238 C 786 300 824 470 982 502 S 1224 566 1366 472',
+      speed: 12.7,
+      heading: 212,
+      depth: 221,
+      temp: 67.6,
+      wpt: 'Harbor Approach (32 ft)',
+      wpts: [
+        { label: 'Bluefin Strike · 220 ft',   x: 982,  y: 502, markerColor: 'blue' },
+        { label: 'Harbor Approach · 32 ft',   x: 1224, y: 566, markerColor: 'cyan' }
+      ],
+      spd: 0.034,
+      ph: 0.55
+    },
+    {
+      id: 'VM-03',
+      name: 'Sea Lark',
+      cls: 'Recreational · 31ft',
+      d: 'M512 824 C 700 806 884 762 1002 660 S 1190 520 1306 566',
+      speed: 9.2,
+      heading: 84,
+      depth: 62,
+      temp: 72.3,
+      wpt: 'Cove Anchorage (28 ft)',
+      wpts: [
+        { label: 'Striped Bass · 58 ft',      x: 1002, y: 660, markerColor: 'green' },
+        { label: 'Cove Anchorage · 28 ft',     x: 1190, y: 520, markerColor: 'cyan' }
+      ],
+      spd: 0.028,
+      ph: 0.30
+    },
+    {
+      id: 'VM-04',
+      name: 'Mariner V',
+      cls: 'Commercial · 74ft',
+      d: 'M600 452 C 762 436 902 560 1042 540 S 1266 440 1384 352',
+      speed: 14.6,
+      heading: 178,
+      depth: 289,
+      temp: 68.2,
+      wpt: 'Shipping Channel (85 ft)',
+      wpts: [
+        { label: 'Channel Wreck · 140 ft',    x: 1042, y: 540, markerColor: 'red' },
+        { label: 'Shipping Channel · 85 ft',  x: 1266, y: 440, markerColor: 'green' }
+      ],
+      spd: 0.040,
+      ph: 0.78
+    },
+    {
+      id: 'VM-05',
+      name: 'Tide Runner',
+      cls: 'Fishing · 38ft',
+      d: 'M556 566 C 720 604 822 704 984 722 S 1244 702 1366 624',
+      speed: 16.1,
+      heading: 121,
+      depth: 114,
+      temp: 69.8,
+      wpt: 'East Lump (92 ft)',
+      wpts: [
+        { label: 'Mahi School · 114 ft',      x: 984,  y: 722, markerColor: 'blue' },
+        { label: 'East Lump 70.8°F · 92 ft',  x: 1244, y: 702, markerColor: 'orange' }
+      ],
+      spd: 0.050,
+      ph: 0.42
+    },
   ];
 
   if (window.location.pathname.includes('about.html')) {
-    // Clear the default long-distance routes
+    // Clear the default long-distance routes on about page
     FLEET.length = 0; 
     
-    // Safe water coordinates distributed across the oceans (1440x900 scale)
     const waterCoords = [
-      // Pacific Ocean
       [150, 450], [200, 300], [250, 600], [150, 650], [100, 400], 
       [1200, 400], [1300, 500], [1250, 600], [1350, 650], [1400, 550],
-      // Atlantic Ocean
       [450, 300], [550, 400], [500, 500], [450, 600], [550, 650], 
       [600, 500], [650, 650], [400, 400], [420, 500],
-      // Indian Ocean
       [950, 550], [1000, 650], [900, 600], [1050, 600], [850, 650], [1100, 550],
-      // Southern Ocean
       [300, 800], [500, 800], [700, 820], [900, 800], [1100, 820],
-      // Arctic/North
       [600, 200], [700, 250], [800, 200]
     ];
 
     waterCoords.forEach((coord, i) => {
-      // Create a short random drift path for each vessel
       const dx = coord[0] + (Math.random() * 40 - 20);
       const dy = coord[1] + (Math.random() * 40 - 20);
       FLEET.push({
         id: 'SCATTER-' + i,
         name: 'Vessel ' + i,
         cls: 'Transport',
-        speed: 10, heading: 90, depth: 0, temp: 15, wpt: 'Drifting',
+        speed: 10, heading: 90, depth: 120, temp: 68, wpt: 'Drifting',
         wpts: [],
         d: `M${coord[0]} ${coord[1]} L${dx.toFixed(1)} ${dy.toFixed(1)}`,
         ph: Math.random(),
-        spd: 0.005 + (Math.random() * 0.01) // Extremely slow drift speed
+        spd: 0.005 + (Math.random() * 0.01)
       });
     });
   }
@@ -301,16 +375,46 @@
     return n;
   };
 
-  let fleet = [];          // built vessel objects {data, route, move, body, tag, len, t, len0}
+  let fleet = [];          // built vessel objects {data, route, move, tag, len, t, len0}
   let pinned = -1;         // pinned vessel index (-1 none)
   let active = 0;          // currently shown vessel index
   let driftTimer = null;
+  let fleetStage = null;
+
+  // Waypoint Marker Pin using the exact user-uploaded marker icons
+  function buildWaypointPin(w, vesselIdx) {
+    const g = el('g', {
+      class: 'chart-wpt',
+      'data-vessel': vesselIdx,
+      transform: `translate(${w.x} ${w.y})`,
+      'aria-hidden': 'true'
+    });
+
+    const markerColor = w.markerColor || (w.color && w.color.includes('green') ? 'green' : (w.color && w.color.includes('red') ? 'red' : (w.color && (w.color.includes('00D4') || w.color.includes('cyan')) ? 'cyan' : 'blue')));
+
+    // Render exact marker pin provided by user along the track line
+    // Source PNG is 46x52 px. Bottom needle tip is at x=23, y=43.
+    // Displayed at w=30, h=34 px. Tip offset: x=-15, y=-28.
+    const img = el('image', {
+      class: 'chart-wpt-img',
+      href: `assets/markers/wpt-marker-${markerColor}.png`,
+      x: '-15',
+      y: '-28',
+      width: '30',
+      height: '34'
+    });
+    img.setAttributeNS('http://www.w3.org/1999/xlink', 'href', `assets/markers/wpt-marker-${markerColor}.png`);
+    g.appendChild(img);
+
+    return g;
+  }
 
   function buildFleet() {
     if (!fleetSvg) return;
     fleetSvg.setAttribute('viewBox', `0 0 ${VBW} ${VBH}`);
     const stage = el('g', { class: 'fleet-stage' });
     const routesG = el('g', { class: 'routes' });
+    const wptsG = el('g', { class: 'waypoints-layer' });
     const boatsG = el('g', { class: 'boats' });
 
     FLEET.forEach((v, i) => {
@@ -319,12 +423,10 @@
       const flow = el('path', { class: 'route-flow', d: v.d, 'data-i': i });
       routesG.appendChild(route);
       routesG.appendChild(flow);
-      // waypoint pings
-      v.wpts.forEach((w, k) => {
-        const ring = el('circle', { class: 'wpt-ring', cx: w[0], cy: w[1], r: 9, 'stroke-width': 1.4, opacity: 0.5 });
-        ring.style.animation = `ping 2.8s ease-out ${k * 1.1}s infinite`;
-        routesG.appendChild(ring);
-        routesG.appendChild(el('circle', { class: 'wpt', cx: w[0], cy: w[1], r: 2.6 }));
+
+      // waypoint markers along the track line
+      v.wpts.forEach((w) => {
+        wptsG.appendChild(buildWaypointPin(w, i));
       });
 
       // interactive boat node
@@ -334,7 +436,7 @@
       move.appendChild(el('path', { class: 'boat-reticle', d: 'M-15 -15 h7 M15 -15 h-7 M-15 15 h7 M15 15 h-7 M-15 -15 v7 M15 -15 v7 M-15 15 v-7 M15 15 v-7' }));
       let bx = '-5', by = '-11.14', bw = '10', bh = '22.27';
       if (window.location.pathname.includes('about.html')) {
-        bx = '-3'; by = '-6.68'; bw = '6'; bh = '13.36'; // very tiny scale
+        bx = '-3'; by = '-6.68'; bw = '6'; bh = '13.36';
       }
       move.appendChild(el('use', { class: 'boat-body-detailed', href: '#vessel-detailed', x: bx, y: by, width: bw, height: bh }));
       move.appendChild(el('circle', { class: 'boat-hit', r: 28 }));
@@ -346,14 +448,13 @@
 
       const len = route.getTotalLength ? route.getTotalLength() : 0;
       route.style.strokeDasharray = len;
-      route.style.strokeDashoffset = allowHeavy ? len : 0; // draw in on scroll (desktop); static elsewhere
+      route.style.strokeDashoffset = allowHeavy ? len : 0;
       const obj = { v, i, route, flow, move, tag, len, t: v.ph };
       fleet.push(obj);
 
       // interaction
       const onEnter = () => { if (pinned < 0) select(i, false); };
       const onLeave = () => { if (pinned < 0) select(0, false); };
-      // bind the full set so hover + keyboard focus both work across engines (select() is idempotent)
       ['pointerenter', 'focus', 'focusin'].forEach((ev) => node.addEventListener(ev, onEnter));
       ['pointerleave', 'blur', 'focusout'].forEach((ev) => node.addEventListener(ev, onLeave));
       node.addEventListener('click', () => { pinned = (pinned === i) ? -1 : i; select(i, true); });
@@ -362,17 +463,16 @@
         if (e.key === 'Escape') { pinned = -1; select(0, false); node.blur(); }
       });
 
-      placeBoat(obj, obj.t); // initial placement
+      placeBoat(obj, obj.t);
     });
 
     stage.appendChild(routesG);
+    stage.appendChild(wptsG);
     stage.appendChild(boatsG);
     fleetSvg.appendChild(stage);
     fleetStage = stage;
-    select(0, false); // command-deck always shows a vessel
+    select(0, false);
   }
-
-  let fleetStage = null;
 
   function placeBoat(o, t) {
     if (!o.len) return;
@@ -393,28 +493,34 @@
       o.flow.classList.toggle('on', on);
       o.move.parentNode.classList.toggle('sel', on);
     });
+    // Waypoints for the active vessel remain prominent
+    const allWpts = fleetSvg.querySelectorAll('.chart-wpt');
+    allWpts.forEach(w => {
+      const vIdx = parseInt(w.getAttribute('data-vessel'), 10);
+      w.style.opacity = (vIdx === i) ? '1' : '0.25';
+    });
+
     const v = FLEET[i];
     setText('fcName', v.name);
     setText('fcClass', v.cls);
     setText('fcId', v.id);
-    setText('fcWaypoint', 'Next waypoint · ' + v.wpt);
     setFc('speed', v.speed, 1); setFc('heading', v.heading, 0);
-    setFc('depth', v.depth, 1); setFc('temp', v.temp, 1);
+    setFc('depth', v.depth, 0); setFc('temp', v.temp, 1);
     if (fleetCard) fleetCard.classList.add('show');
   }
   const setText = (id, t) => { const n = document.getElementById(id); if (n) n.textContent = t; };
   const setFc = (k, val, dec) => { const n = document.querySelector(`[data-fc="${k}"]`); if (n) n.textContent = (+val).toFixed(dec); };
 
-  // gentle live drift on the active vessel's readout
+  // gentle live drift on the active vessel's readout (US customary units)
   function startDrift() {
     if (reduce || driftTimer) return;
     driftTimer = setInterval(() => {
       const v = FLEET[active];
       if (!v || !fleetCard.classList.contains('show')) return;
-      setFc('speed', v.speed + (Math.random() - 0.5) * 1.1, 1);
-      setFc('heading', v.heading + (Math.random() - 0.5) * 5, 0);
-      setFc('depth', v.depth + (Math.random() - 0.5) * 2.6, 1);
-      setFc('temp', v.temp + (Math.random() - 0.5) * 0.4, 1);
+      setFc('speed', v.speed + (Math.random() - 0.5) * 0.8, 1);
+      setFc('heading', (v.heading + (Math.random() - 0.5) * 4 + 360) % 360, 0);
+      setFc('depth', v.depth + (Math.random() - 0.5) * 3.5, 0);
+      setFc('temp', v.temp + (Math.random() - 0.5) * 0.3, 1);
     }, 2400);
   }
 
@@ -425,8 +531,7 @@
     const update = () => {
       const r = hero.getBoundingClientRect();
       const vh = window.innerHeight;
-      const p = Math.min(Math.max(-r.top / (r.height - vh * 0.4), 0), 1); // 0 at top → 1 scrolled
-      // draw routes in once on first reveal
+      const p = Math.min(Math.max(-r.top / (r.height - vh * 0.4), 0), 1);
       if (!drawn) {
         drawn = true;
         fleet.forEach((o, k) => {
@@ -444,19 +549,12 @@
   /* ---------- canvas water ---------- */
   function startWater() {
     const ctx = seaCanvas.getContext('2d');
-    let W, H, DPR, raf, running = false, particles = [], rings = [];
+    let W, H, DPR, raf, running = false, rings = [];
     const resize = () => {
       DPR = Math.min(window.devicePixelRatio || 1, 1.75);
       W = seaCanvas.clientWidth; H = seaCanvas.clientHeight;
       seaCanvas.width = W * DPR; seaCanvas.height = H * DPR;
       ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
-      const n = Math.round((W * H) / 26000);
-      particles = Array.from({ length: Math.min(n, 70) }, () => ({
-        x: Math.random() * W, y: Math.random() * H,
-        r: Math.random() * 1.4 + 0.4, a: Math.random() * 0.5 + 0.15,
-        vx: (Math.random() - 0.5) * 0.12, vy: (Math.random() - 0.5) * 0.10,
-        tw: Math.random() * Math.PI * 2,
-      }));
     };
     resize();
     window.addEventListener('resize', resize);
@@ -522,18 +620,6 @@
         ctx.strokeStyle = isLight ? `rgba(47,125,255,${(0.12 * (1 - age)).toFixed(3)})` : `rgba(60,224,255,${(0.18 * (1 - age)).toFixed(3)})`;
         ctx.lineWidth = 1.2; ctx.stroke();
         return true;
-      });
-
-      // drifting glints
-      particles.forEach((p) => {
-        p.x += p.vx; p.y += p.vy; p.tw += 0.03;
-        if (p.x < 0) p.x = W; if (p.x > W) p.x = 0;
-        if (p.y < 0) p.y = H; if (p.y > H) p.y = 0;
-        const a = p.a * (0.55 + 0.45 * Math.sin(p.tw));
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = isLight ? `rgba(148,163,184,${(a * 0.6).toFixed(3)})` : `rgba(150,205,255,${a.toFixed(3)})`;
-        ctx.fill();
       });
 
       raf = requestAnimationFrame(draw);
@@ -662,11 +748,11 @@
     const dancer = skPanel.querySelector('.sk-dancer');
     const avatar = 'assets/layers/skipper-front.svg';
     const replies = {
-      'Help me find a temp break on SST': 'Open the layers and switch on SST. Where the colors change fast over a short distance, that\'s a temperature break, and that\'s where bait and pelagics stack up.',
-      'Start my first trip': 'Tap Throw Lines when you leave the inlet. I\'ll log your track, your speed and every catch while you fish. Pause or stop any time.',
-      'Drop and share my waypoint': 'Tap Waypoint, pick what you found and save it. It stays Only me until you choose who sees it: your Pier Circle, one fleet, or just the boats you check.',
-      'Add my Dockmates': 'Head to the Network tab and add the boats you fish with as Dockmates. When they share with you, they show up live on your chart.',
-      "Join my club's fleet": 'Ask your club for an invite to its closed fleet. Once you\'re in, pick it on the Network tab and its logo takes the place of the globe.'
+      'Help me find a temp break on SST': 'Open Sea Surface Temperature under Ocean Layers. Look for steep gradient boundaries where cool, nutrient-dense water meets warm ocean currents—these thermal walls concentrate baitfish and pelagics like tuna and marlin.',
+      'Start my first trip': 'One touch on Throw Lines automatically starts recording your route, trolling speeds, and trip metrics silently in the background, freeing you to focus on the run.',
+      'Drop and share my waypoint': 'Log catches, structure, and temperature breaks instantly. Every mark stays strictly confidential to your device until you selectively share with trusted partners or your closed fleet.',
+      'Add my Dockmates': 'Connect directly with trusted fishing buddies on your Network tab for secure, private coordinate sharing that stays completely off the public radio.',
+      "Join my club's fleet": 'Access exclusive member-only leaderboards, private fleet communications, and shared catch feeds configured with your club’s specific boundaries and rules.'
     };
     let busy = false;
     let pending = null;
